@@ -28,10 +28,19 @@ module ArqshoahArquivoVirtual
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Brasilia"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      # g.template_engine nil #to skip views
+      # g.test_framework  nil #to skip test framework
+      # g.assets  false
+      g.helper false
+      # g.stylesheets false
+      g.system_tests nil # Don't generate system test files.
+    end
+
+    config.i18n.default_locale = :'pt-BR'
+    config.i18n.available_locales = [:en, :'pt-BR']
   end
 end
