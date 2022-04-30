@@ -49,8 +49,10 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 # Costum gems
+gem "activeadmin", "~> 2.12"
 gem "autoprefixer-rails", "~> 10.4", ">= 10.4.2.0"
 gem "bootstrap", "~> 5.1", ">= 5.1.3"
+gem "devise", "~> 4.8", ">= 4.8.1"
 
 group :development, :test do
   gem "awesome_print"
