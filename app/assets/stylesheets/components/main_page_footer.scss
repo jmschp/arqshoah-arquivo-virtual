@@ -1,0 +1,18 @@
+footer.main-page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $gray;
+  padding: 10px 15px;
+
+  div.footer-logo {
+    img {
+      height: 20px;
+    }
+  }
+
+  div.footer-copyright, div.footer-contacts {
+    font-size: 0.7rem;
+    color: white;
+  }
+}

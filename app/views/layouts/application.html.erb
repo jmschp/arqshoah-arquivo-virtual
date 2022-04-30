@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ArqshoahArquivoVirtual</title>
+    <title>Arqshoah Arquivo Virtual</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= image_tag "arqshoah-logo-transparent.png", alt: "Arqshoah logo", class: "arqshoah-logo-header" %>
+      <%= render "shared/navbar" %>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <%= render "shared/footer" %>
   </body>
 </html>
