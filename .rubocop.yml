@@ -8,12 +8,12 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - 'db/schema.rb'
-    - 'config/**/*'
+    # - 'config/**/*'
     - 'node_modules/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
+    # - 'script/**/*'
+    # - 'support/**/*'
     - 'tmp/**/*'
-    - 'test/**/*'
+    # - 'test/**/*'
 
 #   # Default formatter will be used if no `-f/--format` option is given.
 #   DefaultFormatter: progress
@@ -668,9 +668,9 @@ AllCops:
 #   Enabled: false
 #   VersionAdded: '0.49'
 
-# Layout/FirstHashElementIndentation:
+Layout/FirstHashElementIndentation:
 #   Description: 'Checks the indentation of the first key in a hash literal.'
-#   Enabled: true
+  Enabled: true
 #   VersionAdded: '0.68'
 #   VersionChanged: '0.77'
 #   # The value `special_inside_parentheses` means that hash literals with braces
@@ -684,7 +684,7 @@ AllCops:
 #   #
 #   # The value `align_braces` means that the indentation of the first key shall
 #   # always be relative to the position of the opening brace.
-#   EnforcedStyle: special_inside_parentheses
+  EnforcedStyle: consistent
 #   SupportedStyles:
 #     - special_inside_parentheses
 #     - consistent
@@ -693,11 +693,11 @@ AllCops:
 #   # but it can be overridden by setting this parameter.
 #   IndentationWidth: ~
 
-# Layout/FirstHashElementLineBreak:
+Layout/FirstHashElementLineBreak:
 #   Description: >-
 #                  Checks for a line break before the first element in a
 #                  multi-line hash.
-#   Enabled: false
+  Enabled: true
 #   VersionAdded: '0.49'
 
 # Layout/FirstMethodArgumentLineBreak:
