@@ -157,7 +157,7 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = %i[encrypted_password password password_confirmation]
 
   # == Localize Date/Time Format
   #
@@ -230,12 +230,17 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :utility_navigation do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #       admin.add_logout_button_to_menu menu
-  #     end
-  #   end
+  config.namespace :admin do |admin|
+    admin.build_menu :utility_navigation do |menu|
+      menu.add label: "Arqshoah Arquivo Virtual" do |sub_menu|
+        admin.add_current_user_to_menu sub_menu, 1
+        sub_menu.add label: AdminUser.model_name.human(count: 2), url: "/admin/admin_users", priority: 2
+        sub_menu.add label: "Convidar #{AdminUser.model_name.human}", url: "/admin/invitation/new", priority: 3
+        sub_menu.add label: "Home", url: "/", priority: 4
+        admin.add_logout_button_to_menu sub_menu, 5
+      end
+    end
+  end
   #
   # If you wanted to add a static menu item to the default menu provided:
   #
@@ -317,7 +322,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  config.footer = '© 2022 Copyright - Arqshoah / LEER. FFLCH/USP'
+  config.footer = "© 2022 Copyright - Arqshoah / LEER. FFLCH/USP"
 
   # == Sorting
   #
