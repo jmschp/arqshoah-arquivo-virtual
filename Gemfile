@@ -46,11 +46,12 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # Costum gems
 gem "activeadmin", "~> 2.12"
 gem "autoprefixer-rails", "~> 10.4", ">= 10.4.2.0"
+gem "aws-sdk-s3", "~> 1.113", ">= 1.113.2", require: false
 gem "bootstrap", "~> 5.1", ">= 5.1.3"
 gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise_invitable", "~> 2.0", ">= 2.0.6"
