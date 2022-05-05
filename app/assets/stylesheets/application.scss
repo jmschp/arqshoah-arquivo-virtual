@@ -1,7 +1,12 @@
+//===== Config files =====\\
 @import "./config_variables/colors";
 @import "./config_variables/bootstrap_variables";
+
+//===== Libraries =====\\
+@import "actiontext.css";
 @import "bootstrap";
 
+//===== Costum files =====\\
 @import "./components";
 
 body {
