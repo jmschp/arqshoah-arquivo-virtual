@@ -14,5 +14,9 @@ footer.main-page-footer {
   div.footer-copyright, div.footer-contacts {
     font-size: 0.7rem;
     color: white;
+    a {
+      text-decoration: none;
+      color: white;
+    }
   }
 }
