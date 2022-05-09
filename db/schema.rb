@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_09_211149) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_09_215247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -115,6 +115,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_09_211149) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interviews", force: :cascade do |t|
+    t.date "date"
+    t.string "location"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.bigint "interviewer_id", null: false
+    t.bigint "interviewed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["interviewed_id"], name: "index_interviews_on_interviewed_id"
+    t.index ["interviewer_id"], name: "index_interviews_on_interviewer_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -133,6 +149,61 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_09_211149) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "people", force: :cascade do |t|
+    t.string "academic_formation"
+    t.date "birth_date"
+    t.integer "birth_date_day"
+    t.integer "birth_date_month"
+    t.integer "birth_date_year"
+    t.integer "birth_date_mask"
+    t.string "birth_place"
+    t.string "birth_place_city"
+    t.string "birth_place_state"
+    t.string "birth_place_country"
+    t.float "birth_place_latitude"
+    t.float "birth_place_longitude"
+    t.date "death_date"
+    t.integer "death_date_day"
+    t.integer "death_date_month"
+    t.integer "death_date_year"
+    t.integer "death_date_mask"
+    t.string "death_place"
+    t.string "death_place_city"
+    t.string "death_place_state"
+    t.string "death_place_country"
+    t.float "death_place_latitude"
+    t.float "death_place_longitude"
+    t.tsvector "document_ts_vector"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "name_variation"
+    t.integer "gender"
+    t.string "registration"
+    t.string "type"
+    t.bigint "religion_id"
+    t.bigint "spouse_id"
+    t.bigint "mother_id"
+    t.bigint "father_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["father_id"], name: "index_people_on_father_id"
+    t.index ["mother_id"], name: "index_people_on_mother_id"
+    t.index ["religion_id"], name: "index_people_on_religion_id"
+    t.index ["spouse_id"], name: "index_people_on_spouse_id"
+  end
+
+  create_table "religions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "interviews", "people", column: "interviewed_id"
+  add_foreign_key "interviews", "people", column: "interviewer_id"
+  add_foreign_key "people", "people", column: "father_id"
+  add_foreign_key "people", "people", column: "mother_id"
+  add_foreign_key "people", "people", column: "spouse_id"
+  add_foreign_key "people", "religions"
 end
