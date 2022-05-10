@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_09_215247) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_10_211343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,6 +113,47 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_09_215247) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "archives", force: :cascade do |t|
+    t.date "date"
+    t.integer "date_day"
+    t.integer "date_month"
+    t.integer "date_year"
+    t.integer "date_mask"
+    t.string "document_number"
+    t.string "document_code"
+    t.tsvector "document_ts_vector"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "location"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "from_name"
+    t.string "from_role"
+    t.integer "page_count"
+    t.string "registration"
+    t.string "title", null: false
+    t.string "to_name"
+    t.string "to_role"
+    t.bigint "archive_classification_id", null: false
+    t.bigint "archive_type_id", null: false
+    t.string "donor_type"
+    t.bigint "donor_id"
+    t.bigint "language_id"
+    t.bigint "issuing_agency_id"
+    t.bigint "receiver_agency_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archive_classification_id"], name: "index_archives_on_archive_classification_id"
+    t.index ["archive_type_id"], name: "index_archives_on_archive_type_id"
+    t.index ["document_ts_vector"], name: "index_archives_on_document_ts_vector", using: :gin
+    t.index ["donor_type", "donor_id"], name: "index_archives_on_donor"
+    t.index ["issuing_agency_id"], name: "index_archives_on_issuing_agency_id"
+    t.index ["language_id"], name: "index_archives_on_language_id"
+    t.index ["receiver_agency_id"], name: "index_archives_on_receiver_agency_id"
+    t.index ["title"], name: "index_archives_on_title", unique: true
   end
 
   create_table "interviews", force: :cascade do |t|
