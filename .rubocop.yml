@@ -1,18 +1,16 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - rubocop-performance
   - rubocop-rails
 
 AllCops:
   Exclude:
-    - 'bin/**/*'
-    - 'db/schema.rb'
+    - "bin/**/*"
+    - "db/schema.rb"
     # - 'config/**/*'
-    - 'node_modules/**/*'
+    - "node_modules/**/*"
     # - 'script/**/*'
     # - 'support/**/*'
-    - 'tmp/**/*'
+    - "tmp/**/*"
     # - 'test/**/*'
 
   # Default formatter will be used if no `-f/--format` option is given.
@@ -104,10 +102,10 @@ AllCops:
 #################### Layout ###########################
 
 Layout/FirstHashElementIndentation:
-  Description: 'Checks the indentation of the first key in a hash literal.'
+  Description: "Checks the indentation of the first key in a hash literal."
   Enabled: true
-  VersionAdded: '0.68'
-  VersionChanged: '0.77'
+  # VersionAdded: "0.68"
+  # VersionChanged: "0.77"
   # The value `special_inside_parentheses` means that hash literals with braces
   # that have their opening brace on the same line as a surrounding opening
   # round parenthesis, shall have their first key indented relative to the
@@ -130,107 +128,135 @@ Layout/FirstHashElementIndentation:
 
 Layout/FirstHashElementLineBreak:
   Description: >-
-                 Checks for a line break before the first element in a
-                 multi-line hash.
+    Checks for a line break before the first element in a
+    multi-line hash.
   Enabled: true
-  VersionAdded: '0.49'
+  # VersionAdded: "0.49"
 
-Layout/SpaceInsideArrayLiteralBrackets:
-  Description: 'Checks the spacing inside array literal brackets.'
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Description: "Checks the spacing inside array literal brackets."
+#   Enabled: true
+#   VersionAdded: "0.52"
+#   EnforcedStyle: space
+#   SupportedStyles:
+#     - space
+#     - no_space
+#     # 'compact' normally requires a space inside the brackets, with the exception
+#     # that successive left brackets or right brackets are collapsed together
+#     - compact
+#   EnforcedStyleForEmptyBrackets: no_space
+#   SupportedStylesForEmptyBrackets:
+#     - space
+#     - no_space
+
+Layout/LineLength:
+  Description: "Checks that line length does not exceed the configured limit."
+  StyleGuide: "#max-line-length"
   Enabled: true
-  VersionAdded: '0.52'
-  EnforcedStyle: space
-  SupportedStyles:
-    - space
-    - no_space
-    # 'compact' normally requires a space inside the brackets, with the exception
-    # that successive left brackets or right brackets are collapsed together
-    - compact
-  EnforcedStyleForEmptyBrackets: no_space
-  SupportedStylesForEmptyBrackets:
-    - space
-    - no_space
+  # VersionAdded: "0.25"
+  # VersionChanged: "1.4"
+  Max: 120
+  # To make it possible to copy or click on URIs in the code, we allow lines
+  # containing a URI to be longer than Max.
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+  # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
+  # directives like '# rubocop: enable ...' when calculating a line's length.
+  IgnoreCopDirectives: true
+  # The AllowedPatterns option is a list of !ruby/regexp and/or string
+  # elements. Strings will be converted to Regexp objects. A line that matches
+  # any regular expression listed in this option will be ignored by LineLength.
+  AllowedPatterns: []
+  # IgnoredPatterns: [] # deprecated
+  Exclude:
+    - "db/migrate/*.rb"
+    - "db/schema.rb"
+    - "config/initializers/*.rb"
 
 #################### Metrics ###########################
 
 Metrics/AbcSize:
   Description: >-
-                 A calculated magnitude based on number of assignments,
-                 branches, and conditions.
+    A calculated magnitude based on number of assignments,
+    branches, and conditions.
   Reference:
     - http://c2.com/cgi/wiki?AbcMetric
     - https://en.wikipedia.org/wiki/ABC_Software_Metric
   Enabled: true
-  VersionAdded: '0.27'
-  VersionChanged: '1.5'
+  # VersionAdded: "0.27"
+  # VersionChanged: "1.5"
   # The ABC size is a calculated magnitude, so this number can be an Integer or
   # a Float.
   IgnoredMethods: []
   CountRepeatedAttributes: true
   Max: 17
   Exclude:
-    - 'db/**/*.rb'
+    - "db/**/*.rb"
 
 Metrics/BlockLength:
-  Description: 'Avoid long blocks with many lines.'
+  Description: "Avoid long blocks with many lines."
   Enabled: true
-  VersionAdded: '0.44'
-  VersionChanged: '1.5'
-  CountComments: false  # count full line comments?
+  # VersionAdded: "0.44"
+  # VersionChanged: "1.5"
+  CountComments: false # count full line comments?
   Max: 25
   CountAsOne: []
-  ExcludedMethods: [] # deprecated, retained for backwards compatibility
+  # ExcludedMethods: [] # deprecated, retained for backwards compatibility
   IgnoredMethods:
     # By default, exclude the `#refine` method, as it tends to have larger
     # associated blocks.
     - refine
   Exclude:
-    - '**/*.gemspec'
-    - 'db/**/*.rb'
+    - "**/*.gemspec"
+    - "db/**/*.rb"
+    - "config/environments/*.rb"
+    - "config/initializers/*.rb"
 
 Metrics/MethodLength:
-  Description: 'Avoid methods longer than 10 lines of code.'
-  StyleGuide: '#short-methods'
+  Description: "Avoid methods longer than 10 lines of code."
+  StyleGuide: "#short-methods"
   Enabled: true
-  VersionAdded: '0.25'
-  VersionChanged: '1.5'
-  CountComments: false  # count full line comments?
+  # VersionAdded: "0.25"
+  # VersionChanged: "1.5"
+  CountComments: false # count full line comments?
   Max: 10
   CountAsOne: []
-  ExcludedMethods: [] # deprecated, retained for backwards compatibility
+  # ExcludedMethods: [] # deprecated, retained for backwards compatibility
   IgnoredMethods: []
   Exclude:
-    - 'db/**/*.rb'
+    - "db/**/*.rb"
 
 #################### Style ###############################
 
 Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
+  Description: "Document classes and non-namespace modules."
   Enabled: false
-  VersionAdded: '0.9'
+  # VersionAdded: "0.9"
   AllowedConstants: []
   Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
+    - "spec/**/*"
+    - "test/**/*"
 
 Style/EmptyMethod:
-  Description: 'Checks the formatting of empty method definitions.'
-  StyleGuide: '#no-single-line-methods'
+  Description: "Checks the formatting of empty method definitions."
+  StyleGuide: "#no-single-line-methods"
   Enabled: true
-  VersionAdded: '0.46'
+  # VersionAdded: "0.46"
   EnforcedStyle: expanded
   SupportedStyles:
     - compact
     - expanded
 
-
 Style/FrozenStringLiteralComment:
   Description: >-
-                 Add the frozen_string_literal comment to the top of files
-                 to help transition to frozen string literals by default.
+    Add the frozen_string_literal comment to the top of files
+    to help transition to frozen string literals by default.
   Enabled: true
-  VersionAdded: '0.36'
-  VersionChanged: '0.79'
+  # VersionAdded: "0.36"
+  # VersionChanged: "0.79"
   EnforcedStyle: always
   SupportedStyles:
     # `always` will always add the frozen string literal comment to a file
@@ -246,24 +272,25 @@ Style/FrozenStringLiteralComment:
     - never
   SafeAutoCorrect: false
   Exclude:
-    - 'db/**/*.rb'
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'config/**/*.rb'
+    - "db/**/*.rb"
+    - "Gemfile"
+    - "Rakefile"
+    - "config/**/*.rb"
+    - "config.ru"
 
 Style/RedundantSelf:
   Description: "Don't use self where it's not needed."
-  StyleGuide: '#no-self-unless-required'
+  StyleGuide: "#no-self-unless-required"
   Enabled: false
-  VersionAdded: '0.10'
-  VersionChanged: '0.13'
+  # VersionAdded: "0.10"
+  # VersionChanged: "0.13"
 
 Style/StringLiterals:
-  Description: 'Checks if uses of quotes match the configured preference.'
-  StyleGuide: '#consistent-string-literals'
+  Description: "Checks if uses of quotes match the configured preference."
+  StyleGuide: "#consistent-string-literals"
   Enabled: true
-  VersionAdded: '0.9'
-  VersionChanged: '0.36'
+  # VersionAdded: "0.9"
+  # VersionChanged: "0.36"
   EnforcedStyle: double_quotes
   SupportedStyles:
     - single_quotes
