@@ -9,6 +9,9 @@ class Archive < ApplicationRecord
   belongs_to :issuing_agency, class_name: "Organization", inverse_of: :issued_archives, optional: true
   belongs_to :receiver_agency, class_name: "Organization", inverse_of: :received_archives, optional: true
 
+  has_many :citations, as: :record, inverse_of: :record, dependent: :destroy
+  has_many :people_cited, through: :citations, source: :person
+
   has_one_attached :pdf
   has_many_attached :images
 

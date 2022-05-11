@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_10_215346) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_11_191104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,6 +158,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_10_215346) do
     t.index ["title"], name: "index_archives_on_title", unique: true
   end
 
+  create_table "citations", force: :cascade do |t|
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_citations_on_person_id"
+    t.index ["record_type", "record_id"], name: "index_citations_on_record"
+  end
+
   create_table "interviews", force: :cascade do |t|
     t.date "date"
     t.string "location"
@@ -246,6 +256,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_10_215346) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "citations", "people"
   add_foreign_key "interviews", "people", column: "interviewed_id"
   add_foreign_key "interviews", "people", column: "interviewer_id"
   add_foreign_key "people", "people", column: "father_id"
