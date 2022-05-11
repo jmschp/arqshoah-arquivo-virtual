@@ -28,7 +28,6 @@ module DateDisplay
   included do
     before_save :set_date_and_mask_date
 
-    # rubocop:disable Metrics/AbcSize
     def date_display(date_field_sym)
       case self.try("#{date_field_sym}_mask")
       when DATE_MASK_VALUES[:only_year][:mask]
@@ -96,5 +95,4 @@ module DateDisplay
       }
     end
   end
-  # rubocop:enable Metrics/AbcSize
 end
