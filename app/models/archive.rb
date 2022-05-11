@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Archive < ApplicationRecord
+  include DateDisplay
+  include FullTextSearch
+  include Registration
+
   # rubocop:disable Metrics/LineLength
   belongs_to :archive_classification, inverse_of: :archives
   belongs_to :archive_type, inverse_of: :archives
@@ -23,4 +27,28 @@ class Archive < ApplicationRecord
   validates :date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { self.date_month.present? || self.date_day.present? }
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }
   # rubocop:enable Metrics/LineLength
+
+  private
+
+  def create_plain_text
+    <<~RECORD
+      #{self.title}
+      #{self.document_number}
+      #{self.document_code}
+      #{self.location}
+      #{self.donor&.name}
+      #{self.issuing_agency&.name}
+      #{self.receiver_agency&.name}
+      #{self.from_name}
+      #{self.from_role}
+      #{self.to_name}
+      #{self.to_role}
+      #{self.archive_classification.name}
+      #{self.archive_type.name}
+      #{self.language.name}
+      #{self.people_cited.pluck(:first_name, :last_name).map { |name| "#{name[0]} #{name[1]}" }.join('; ')}
+      #{self.description.to_plain_text}
+      #{self.observation.to_plain_text}
+    RECORD
+  end
 end

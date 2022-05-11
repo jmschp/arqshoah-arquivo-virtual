@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Person < ApplicationRecord
+  include DateDisplay
+  include FullTextSearch
+  include Registration
+
   # rubocop:disable Metrics/LineLength
   belongs_to :father, class_name: "Person", optional: true
   belongs_to :mother, class_name: "Person", optional: true
@@ -23,4 +27,28 @@ class Person < ApplicationRecord
   has_rich_text :observation
 
   enum :gender, male: 0, female: 1
+
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  private
+
+  def create_plain_text
+    <<~RECORD
+      #{self.first_name} #{self.last_name}
+      #{self.name_variation}
+      #{self.birth_place}
+      #{self.death_place}
+      #{self.academic_formation}
+      #{self.religion&.name}
+      #{self.spouse&.name}
+      #{self.mother&.name}
+      #{self.father&.name}
+      #{self.family_members.to_plain_text}
+      #{self.professional_activities.to_plain_text}
+      #{self.description.to_plain_text}
+      #{self.observation.to_plain_text}
+    RECORD
+  end
 end
