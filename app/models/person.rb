@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Person < ApplicationRecord
+  belongs_to :father, class_name: "Person", optional: true
+  belongs_to :mother, class_name: "Person", optional: true
+  belongs_to :spouse, class_name: "Person", optional: true
   belongs_to :religion, optional: true
 
   has_many :citations, inverse_of: :person, dependent: :destroy
@@ -12,4 +15,11 @@ class Person < ApplicationRecord
 
   has_one_attached :pdf
   has_many_attached :images
+
+  has_rich_text :family_members
+  has_rich_text :professional_activities
+  has_rich_text :description
+  has_rich_text :observation
+
+  enum :gender, male: 0, female: 1
 end
