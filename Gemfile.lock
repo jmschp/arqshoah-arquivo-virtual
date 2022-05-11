@@ -138,6 +138,8 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.8.1)
+    faker (2.20.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
@@ -357,6 +359,7 @@ DEPENDENCIES
   devise (~> 4.8, >= 4.8.1)
   devise_invitable (~> 2.0, >= 2.0.6)
   dotenv-rails
+  faker
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
