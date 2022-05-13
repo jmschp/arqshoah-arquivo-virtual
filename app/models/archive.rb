@@ -3,6 +3,7 @@
 class Archive < ApplicationRecord
   include DateDisplay
   include FullTextSearch
+  include PeopleCitations
   include Registration
 
   # rubocop:disable Metrics/LineLength
