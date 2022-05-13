@@ -210,10 +210,10 @@ Metrics/BlockLength:
     # associated blocks.
     - refine
   Exclude:
-    - "**/*.gemspec"
-    - "db/**/*.rb"
+    - "app/admin/**/*.rb"
     - "config/environments/*.rb"
     - "config/initializers/*.rb"
+    - "db/**/*.rb"
 
 Metrics/MethodLength:
   Description: "Avoid methods longer than 10 lines of code."
