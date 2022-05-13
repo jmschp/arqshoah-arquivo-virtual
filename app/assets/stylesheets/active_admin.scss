@@ -15,3 +15,23 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+
+.admin-show-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-show-image {
+  height: 400px;
+  .panel_contents {
+    height: 100%;
+  }
+  img {
+    display: block;
+    margin: auto;
+    max-height: 95%;
+    max-width: 95%;
+  }
+}
