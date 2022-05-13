@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      interview:
+        one: Entrevista
+        other: Entrevistas
+    attributes:
+      interview:
+        location: Localização
+        date: Data
+        interviewer: Entrevistador
+        interviewed: Entrevistado

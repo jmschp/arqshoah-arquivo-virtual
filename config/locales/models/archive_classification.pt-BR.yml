@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      archive_classification:
+       one: Classificação de Arquivo
+       other: Classificações de Arquivo
+    attributes:
+      archive_classification:
+        name: Nome

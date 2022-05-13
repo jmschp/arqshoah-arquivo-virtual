@@ -1,0 +1,42 @@
+pt-BR:
+  activerecord:
+    models:
+      archive:
+        one: Arquivo
+        other: Arquivos
+    attributes:
+      archive:
+        archive_classification: Classificação
+        archive_type: Tipologia
+        date: Data
+        date_year: Ano
+        date_month: Mês
+        date_day: Dia
+        description: Descrição
+        document_code: Código
+        document_number: Número
+        donor: Cortesia de
+        from_name: De
+        from_role: Cargo
+        images: Imagens
+        issuing_agency: Instituição de origem
+        language: Idioma
+        location: Localização
+        page_count: Total de Páginas
+        pdf: Anexo PDF
+        observation: Observação
+        tags: Palavras-chave
+        title: Título
+        to_name: Para
+        to_role: Cargo
+        receiver_agency: Instituição de destino
+        registration: Registro
+        survivors: Testemunhos citados
+    errors:
+      models:
+        archive:
+          attributes:
+              date_year:
+                blank: não pode ficar em branco, caso tenha Mês ou Dia
+              date_month:
+                blank: não pode ficar em branco, caso tenha Dia

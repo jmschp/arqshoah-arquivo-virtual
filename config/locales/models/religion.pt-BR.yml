@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      religion:
+        one: Religião
+        other: Religiões
+    attributes:
+      religion:
+        name: Religião

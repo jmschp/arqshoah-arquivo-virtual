@@ -1,0 +1,56 @@
+pt-BR:
+  activerecord:
+    models:
+      person:
+        one: Pessoa
+        other: Pessoas
+      commoner:
+        one: Outra Pessoa
+        other: Outras Pessoas
+      savior:
+        one: Justo e Salvador
+        other: Justos e Salvadores
+      survivor:
+        one: Sobrevivente
+        other: Sobreviventes
+    attributes:
+      person:
+        academic_formation: Formação acadêmica
+        birth_date: Data de nascimento
+        birth_date_day: Dia de nascimento
+        birth_date_month: Mês de nascimento
+        birth_date_year: Ano de nascimento
+        birth_place_city: Cidade de nascimento
+        birth_place_state: Estado de nascimento
+        birth_place_country: País de nascimento
+        birth_place: Local de nascimento
+        death_date: Data de falecimento
+        death_date_day: Dia de falecimento
+        death_date_month: Mês de falecimento
+        death_date_year: Ano de falecimento
+        death_place_city: Cidade de falecimento
+        death_place_state: Estado de falecimento
+        death_place_country: País de falecimento
+        death_place: Local da falecimento
+        description: Descrição
+        family_members: Família
+        father: Pai
+        first_name: Primeiro nome
+        gender: Gênero
+        images: Imagens
+        last_name: Sobrenome
+        maternal_grandfather: Avô materno
+        maternal_grandmother: Avó materna
+        name: Nome
+        name_variation: Variação do nome
+        mother: Mãe
+        observation: Observação
+        paternal_grandfather: Avô paterno
+        paternal_grandmother: Avó paterna
+        pdf: Anexo PDF
+        professional_activities: Atividades profissionais
+        religion: Religião
+        siblings: Irmãos
+        sibling: Irmão
+        spouse: Cônjuge
+        registration: Registro

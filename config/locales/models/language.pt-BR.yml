@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      language:
+        one: Idioma
+        other: Idiomas
+    attributes:
+      language:
+        name: Idioma

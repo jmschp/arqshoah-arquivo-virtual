@@ -222,3 +222,10 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
+  attributes:
+    created_at: Criado em
+    updated_at: Atualizado em
+    city: Cidade
+    state: Estado
+    country: País
+    people_cited: Pessoas Citadas

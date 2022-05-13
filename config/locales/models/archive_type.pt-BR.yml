@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      archive_type:
+        one: Tipologia de Arquivo
+        other: Tipologias de Arquivo
+    attributes:
+      archive_type:
+        name: Nome
