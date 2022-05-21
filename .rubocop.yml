@@ -175,6 +175,7 @@ Layout/LineLength:
     - "db/migrate/*.rb"
     - "db/schema.rb"
     - "config/initializers/*.rb"
+    - "app/views/admin/**/*.arb"
 
 #################### Metrics ###########################
 
@@ -214,6 +215,7 @@ Metrics/BlockLength:
     - "config/environments/*.rb"
     - "config/initializers/*.rb"
     - "db/**/*.rb"
+    - "app/views/admin/**/*.arb"
 
 Metrics/MethodLength:
   Description: "Avoid methods longer than 10 lines of code."
