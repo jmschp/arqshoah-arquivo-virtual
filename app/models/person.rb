@@ -28,6 +28,12 @@ class Person < ApplicationRecord
 
   enum :gender, male: 0, female: 1
 
+  def self.select_options_name
+    self.order(:last_name).pluck(:first_name, :last_name, :id).map do |person|
+      ["#{person[1].upcase} #{person[0]}", person[2]]
+    end
+  end
+
   def name
     "#{self.first_name} #{self.last_name}"
   end

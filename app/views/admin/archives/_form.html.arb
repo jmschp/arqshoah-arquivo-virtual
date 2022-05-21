@@ -1,0 +1,103 @@
+# frozen_string_literal: true
+
+render "admin/shared/trix_import"
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+  h2 archive.persisted? ? archive.registration : "RG-ARQ/#{Archive.maximum(:id).present? ? Archive.maximum(:id).next : 1}"
+
+  f.inputs "Informações gerais" do
+    f.input :title
+    f.input :document_number, label: "No. Doc."
+    f.input :document_code
+    f.input :page_count, label: "Páginas"
+    f.input :archive_type, input_html: { class: "select2-init", style: "width: 80%;" }
+    f.input :archive_classification, input_html: { class: "select2-init", style: "width: 80%;" }
+    f.input :location, as: :select, collection: [archive.location], input_html: { class: "select2-init location-select2", style: "width: 80%;" }
+    f.input :language, input_html: { class: "select2-init", style: "width: 80%;" }
+  end
+
+  f.inputs "Informações data" do
+    f.input :date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "select2-init", style: "width: 80%;" }
+    f.input :date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "select2-init", style: "width: 80%;" }
+    f.input :date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
+  end
+
+  f.inputs "Cortesia de" do
+    tabs do
+      tab Organization.model_name.human do
+        f.inputs do
+          f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", style: "width: 100%;", class: "select2-init", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? false : true) }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? false : true) }
+        end
+      end
+      tab Person.model_name.human do
+        f.inputs do
+          f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", class: "select2-init", style: "width: 100%;", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? true : false) }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? true : false) }
+        end
+      end
+    end
+  end
+
+  f.inputs "Inserir documento" do
+    f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
+    f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+  end
+
+  f.inputs "Informações de agência" do
+    columns do
+      column do
+        f.inputs "Emissor" do
+          f.label :from_name
+          f.input :from_name, label: false
+          f.label :from_role
+          f.input :from_role, label: false
+          f.label :issuing_agency
+          f.input :issuing_agency, label: false, input_html: { class: "select2-init", style: "width: 80%;" }
+        end
+      end
+      column do
+        f.inputs "Destinatário" do
+          f.label :to_name
+          f.input :to_name, label: false
+          f.label :to_role
+          f.input :to_role, label: false
+          f.label :receiver_agency
+          f.input :receiver_agency, label: false, input_html: { class: "select2-init", style: "width: 80%;" }
+        end
+      end
+    end
+  end
+
+  f.inputs "Pessoas citadas" do
+    columns do
+      column do
+        f.inputs Archive.human_attribute_name(:cited_survivor) do
+          f.input :people_cited, collection: Survivor.all, label: false, input_html: { class: "select2-init", style: "width: 100%;", id: "archive_survivor_ids" }
+        end
+      end
+      column do
+        f.inputs "Personalidades citados" do
+          f.input :people_cited, collection: Savior.all, label: false, input_html: { class: "select2-init", style: "width: 100%;", id: "archive_personality_ids" }
+        end
+      end
+      column do
+        f.inputs "Outros citados" do
+          f.input :people_cited, collection: Commoner.all, label: false, input_html: { class: "select2-init", style: "width: 100%;", id: "archive_commoner_ids" }
+        end
+      end
+    end
+  end
+
+  f.inputs "Informações complementares" do
+    f.label :description
+    f.rich_text_area :description
+    br
+    f.label :observation
+    f.rich_text_area :observation
+    br
+  end
+
+  f.actions
+end

@@ -119,4 +119,6 @@ ActiveAdmin.register Archive do
     end
     active_admin_comments
   end
+
+  form partial: "form"
 end
