@@ -2,6 +2,7 @@
 
 module Registration
   extend ActiveSupport::Concern
+  include GetRegistrationName
 
   included do
     after_create :set_registration
@@ -10,25 +11,8 @@ module Registration
   private
 
   def set_registration
-    registration = case self
-                   when Archive
-                     "RG-ARQ/#{self.id}"
-                   #  when Book
-                   #  "RG-PUB/#{self.id}"
-                   #  when Education
-                   # "RG-EDU/#{self.id}"
-                   #  when Iconography
-                   #  "RG-ICO/#{self.id}"
-                   #  when Patrimony
-                   #  "RG-PAT/#{self.id}"
-                   when Savior
-                     "RG-PER/#{self.id}"
-                   #  when Press
-                   #  "RG-HEM/#{self.id}"
-                   when Survivor
-                     "RG-TES/#{self.id}"
-                   end
+    registration_name = get_registration_name(self)
 
-    self.update_column(:registration, registration) # rubocop:disable  Rails/SkipsModelValidations
+    self.update_column(:registration, "#{registration_name}/#{self.id}") # rubocop:disable  Rails/SkipsModelValidations
   end
 end

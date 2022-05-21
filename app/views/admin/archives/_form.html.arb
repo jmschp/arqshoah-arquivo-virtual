@@ -4,7 +4,7 @@ render "admin/shared/trix_import"
 
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
-  h2 archive.persisted? ? archive.registration : "RG-ARQ/#{Archive.maximum(:id).present? ? Archive.maximum(:id).next : 1}"
+  h2 registration(resource)
 
   f.inputs "Informações gerais" do
     f.input :title
