@@ -27,14 +27,14 @@ active_admin_form_for [:admin, resource] do |f|
     tabs do
       tab Organization.model_name.human do
         f.inputs do
-          f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", style: "width: 100%;", class: "select2-init", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? false : true) }
-          f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? false : true) }
+          f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", style: "width: 100%;", class: "select2-init", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
         end
       end
       tab Person.model_name.human do
         f.inputs do
-          f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", class: "select2-init", style: "width: 100%;", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? true : false) }
-          f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: (f.object.donor_type.nil? || f.object.donor_type == "Organization" ? true : false) }
+          f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", class: "select2-init", style: "width: 100%;", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
         end
       end
     end
