@@ -6,6 +6,13 @@ pt-BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
+  attributes:
+    created_at: Criado em
+    updated_at: Atualizado em
+    city: Cidade
+    state: Estado
+    country: País
+    people_cited: Pessoas Citadas
   date:
     abbr_day_names:
     - dom
@@ -222,10 +229,3 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
-  attributes:
-    created_at: Criado em
-    updated_at: Atualizado em
-    city: Cidade
-    state: Estado
-    country: País
-    people_cited: Pessoas Citadas
