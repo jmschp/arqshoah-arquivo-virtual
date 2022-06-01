@@ -1,3 +1,0 @@
-# frozen_string_literal: true
-
-script type: "module", src: "../../assets/trix.js", defer: true
