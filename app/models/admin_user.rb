@@ -11,5 +11,6 @@ class AdminUser < ApplicationRecord
   validates :email_confirmation, presence: true, if: :email_changed?
   validates :name, presence: true, length: { maximum: 255 }
   validates :password, confirmation: true
+  validates :password_confirmation, presence: true, if: :encrypted_password_changed?
   # rubocop:enable Metrics/LineLength
 end
