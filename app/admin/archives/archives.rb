@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Archive do
+  includes :archive_type, :archive_classification
+
+  permit_params(
+    :archive_classification_id, :archive_type_id, :date_day, :date_month, :date_year, :description, :donor_id,
+    :donor_type, :document_code, :document_number, :from_name, :from_role, :issuing_agency_id, :language_id,
+    :location, :observation, :page_count, :pdf, :permission_level, :receiver_agency_id, :title, :to_name, :to_role,
+    { images: [], people_cited_ids: [] }
+  )
+
   index do
     selectable_column
     column :registration, sortable: :id do |archive|
