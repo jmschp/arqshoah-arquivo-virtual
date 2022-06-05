@@ -1,0 +1,36 @@
+pt-BR:
+  activerecord:
+    models:
+      admin_user:
+       one: Usuário Admin
+       other: Usuários Admin
+    attributes:
+      admin_user:
+        confirmation_token: Token de confirmação
+        confirmation_sent_at: Confirmação enviada em
+        confirmed_at: Confirmado em
+        current_sign_in_at: Login atual em
+        current_sign_in_ip: IP de login atual
+        email_confirmation: Confirmação de e-mail
+        encrypted_password: Senha criptografada
+        failed_attempts: Tentativas falhas
+        invitation_token: Token de convite
+        invitation_created_at: Convite criado em
+        invitation_sent_at: Convite enviado em
+        invitation_accepted_at: Convite aceito em
+        invitation_limit: Limite de convite
+        invited_by_type: Convidado por tipo
+        invited_by_id: Convidado por id
+        invitations_count: Contagem de convites
+        last_sign_in_at: Último login em
+        last_sign_in_ip: IP de último login
+        locked_at: Bloqueado em
+        name: Nome
+        password: Senha
+        password_confirmation: Confirmação de senha
+        remember_created_at: Lembre-se criado em
+        reset_password_token: Token de redefinir senha
+        reset_password_sent_at: Redefinir senha enviado em
+        sign_in_count: Contagem de login
+        unconfirmed_email: E-mail não confirmado
+        unlock_token: Token de desbloqueio

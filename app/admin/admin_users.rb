@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
+  actions :all, except: [:new]
+
+  permit_params :email, :name, :password, :password_confirmation
 
   index do
     selectable_column
@@ -10,7 +12,7 @@ ActiveAdmin.register AdminUser do
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
-    actions
+    actions dropdown: true
   end
 
   filter :email
@@ -19,8 +21,11 @@ ActiveAdmin.register AdminUser do
   filter :created_at
 
   form do |f|
+    f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
+      f.input :name
       f.input :email
+      f.input :email_confirmation
       f.input :password
       f.input :password_confirmation
     end

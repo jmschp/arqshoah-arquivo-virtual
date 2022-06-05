@@ -21,7 +21,13 @@ end
 #=======================================# Admin User #=======================================#
 puts "Creating admin users"
 
-AdminUser.create!(email: "jmiguelpimenta@icloud.com", password: "123123", password_confirmation: "123123")
+AdminUser.create!(
+  email: "jmiguelpimenta@icloud.com",
+  email_confirmation: "jmiguelpimenta@icloud.com",
+  name: "Miguel Pimenta",
+  password: "123123",
+  password_confirmation: "123123"
+)
 
 #=======================================# Commoner #=======================================#
 puts "Creating commoners"
