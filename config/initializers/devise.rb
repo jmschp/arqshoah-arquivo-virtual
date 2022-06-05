@@ -154,6 +154,7 @@ Devise.setup do |config|
   # and the regexp used to test it when validate_on_invite is not set.
   # config.invite_key = { email: /\A[^@]+@[^@]+\z/ }
   # config.invite_key = { email: /\A[^@]+@[^@]+\z/, username: nil }
+  config.invite_key = { name: nil, email: nil }
 
   # Ensure that invited record is valid.
   # The invitation won't be sent if this check fails.

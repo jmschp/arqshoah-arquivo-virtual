@@ -5,10 +5,15 @@
   <br>
   <% resource.class.invite_key_fields.each do |field| -%>
     <div class="field">
-      <%= f.label field %><br />
+      <%= f.label field %><br>
       <%= f.text_field field %>
     </div>
+    <br>
   <% end -%>
+  <div class="field">
+    <%= f.label :email_confirmation %><br>
+    <%= f.text_field :email_confirmation %>
+  </div>
 
   <div class="actions">
     <%= f.submit t("devise.invitations.new.submit_button") %>

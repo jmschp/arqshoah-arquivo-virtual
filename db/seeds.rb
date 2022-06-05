@@ -26,7 +26,8 @@ AdminUser.create!(
   email_confirmation: "jmiguelpimenta@icloud.com",
   name: "Miguel Pimenta",
   password: "123123",
-  password_confirmation: "123123"
+  password_confirmation: "123123",
+  invitation_limit: 10
 )
 
 #=======================================# Commoner #=======================================#
