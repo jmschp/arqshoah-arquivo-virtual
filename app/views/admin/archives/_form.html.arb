@@ -13,7 +13,7 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :page_count, label: "Páginas"
     f.input :archive_type, input_html: { class: "tom-select-init" }
     f.input :archive_classification, input_html: { class: "tom-select-init" }
-    f.input :location, as: :select, collection: [archive.location], input_html: { class: "tom-select-init location-select2" }
+    f.input :location, as: :select, collection: [archive.location], input_html: { class: "tom-select-init location-tom-select" }
     f.input :language, input_html: { class: "tom-select-init" }
   end
 
