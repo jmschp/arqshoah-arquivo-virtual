@@ -3,6 +3,7 @@
 class Archive < ApplicationRecord
   include DateDisplay
   include FullTextSearch
+  include LocationGeocode
   include PeopleCitations
   include Registration
 
