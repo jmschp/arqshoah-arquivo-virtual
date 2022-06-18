@@ -7,7 +7,8 @@ class Archive < ApplicationRecord
   include PeopleCitations
   include Registration
 
-  # rubocop:disable Metrics/LineLength
+  has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
+
   belongs_to :archive_classification, inverse_of: :archives
   belongs_to :archive_type, inverse_of: :archives
   belongs_to :donor, polymorphic: true, inverse_of: :donated_archives
@@ -24,6 +25,7 @@ class Archive < ApplicationRecord
   has_rich_text :description
   has_rich_text :observation
 
+  # rubocop:disable Metrics/LineLength
   validates :date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true
   validates :date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { self.date_day.present? }
   validates :date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { self.date_month.present? || self.date_day.present? }

@@ -1,0 +1,30 @@
+<% if @versions.present? %>
+  <b>Atenção não é possível versionar todos os campos.</b>
+  <br>
+  <h3>Versão atual: <%= @versions.length %></h3>
+  <b>Criada em:</b> <%= l(@versions.last.created_at, format: :long) %>
+  <br>
+  <b><%= AdminUser.model_name.human %>:</b> <%= @versions.last.whodunnit %>
+  <br>
+  <br>
+  <% if @versions.length > 0 %>
+    <% if (!params[:version] || params[:version].to_i > 0) && @versions[params[:version].to_i - 1].event != "create" %>
+      <%= link_to "Versão anterior", { version: (params[:version] || @versions.length).to_i - 1 } %>
+      <br>
+    <% end %>
+    <% if params[:version] && params[:version].to_i + 1 < @versions.length %>
+      <%= link_to "Versão seguinte", { version: params[:version].to_i + 1 } %>
+    <% end %>
+    <% if params[:version] %>
+      <h3>Esta é a versão: <%= params[:version] %></h3>
+      <b>Modificada em:</b> <%= @versions[params[:version].to_i].created_at %>
+      <br>
+      <b><%= AdminUser.model_name.human %>:</b> <%= @versions[params[:version].to_i].whodunnit %>
+      <br>
+      <br>
+      <%= link_to "Ir para versão atual" %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Este item não tem versões registradas.</p>
+<% end %>

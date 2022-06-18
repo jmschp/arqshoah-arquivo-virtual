@@ -10,6 +10,14 @@ ActiveAdmin.register Archive do
     { images: [], people_cited_ids: [] }
   )
 
+  controller do
+    def show
+      @archive = Archive.includes(versions: :item).find(params[:id])
+      @versions = @archive.versions
+      @archive = @archive.versions[params[:version].to_i].reify if params[:version]
+    end
+  end
+
   index do
     selectable_column
     column :registration, sortable: :id do |archive|
@@ -41,7 +49,9 @@ ActiveAdmin.register Archive do
               end
             end
           else
-            image_tag "arqshoah-logo.png"
+            div class: "admin-show-image" do
+              image_tag "arqshoah-logo.png"
+            end
           end
         end
       end
@@ -71,6 +81,11 @@ ActiveAdmin.register Archive do
           row :document_number
           row :page_count
           row :donor
+        end
+      end
+      column do
+        panel "Versões" do
+          render partial: "admin/shared/version"
         end
       end
     end
