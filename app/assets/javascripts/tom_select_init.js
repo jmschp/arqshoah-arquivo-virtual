@@ -7,6 +7,7 @@ function tomSelectInit(selector = ".tom-select-init") {
 
 function locationFetchSettings() {
   return {
+    loadThrottle: 500,
     valueField: "display_name",
     labelField: "display_name",
     searchField: "display_name",
@@ -15,7 +16,7 @@ function locationFetchSettings() {
         email: "leer@usp.br",
         format: "jsonv2",
         limit: 5,
-        "accept-language": "pt-BR",
+        "accept-language": "pt",
         q: query,
       };
 

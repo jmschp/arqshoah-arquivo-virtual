@@ -30,6 +30,9 @@ class Person < ApplicationRecord
 
   accepts_nested_attributes_for :interviews_given, allow_destroy: true, reject_if: :all_blank
 
+  after_validation :geocode_birth_place
+  after_validation :geocode_death_place
+
   ransack_alias :name, :first_name_or_last_name_or_name_variation
 
   def self.select_options_name
@@ -60,5 +63,37 @@ class Person < ApplicationRecord
       #{self.description.to_plain_text}
       #{self.observation.to_plain_text}
     RECORD
+  end
+
+  def geocode_birth_place
+    if self.birth_place.present? && self.birth_place_changed? &&
+       (birth_place_lat_lon = Geocoder.search(self.birth_place).first&.coordinates)
+      self.birth_place_latitude = birth_place_lat_lon[0]
+      self.birth_place_longitude = birth_place_lat_lon[1]
+    end
+
+    if self.birth_place_latitude.present? && self.birth_place_longitude.present? &&
+       (self.birth_place_latitude_changed? || self.birth_place_longitude_changed?)
+      result = Geocoder.search([self.birth_place_latitude, self.birth_place_longitude]).first
+      self.birth_place_city = result.city || result.town
+      self.birth_place_state = result.state || result.county
+      self.birth_place_country = result.country
+    end
+  end
+
+  def geocode_death_place
+    if self.death_place.present? && self.death_place_changed? &&
+       (death_place_lat_lon = Geocoder.search(self.death_place).first&.coordinates)
+      self.death_place_latitude = death_place_lat_lon[0]
+      self.death_place_longitude = death_place_lat_lon[1]
+    end
+
+    if self.death_place_latitude.present? && self.death_place_longitude.present? &&
+       (self.death_place_latitude_changed? || self.death_place_longitude_changed?)
+      result = Geocoder.search([self.death_place_latitude, self.death_place_longitude]).first
+      self.death_place_city = result.city || result.town
+      self.death_place_state = result.state || result.county
+      self.death_place_country = result.country
+    end
   end
 end
