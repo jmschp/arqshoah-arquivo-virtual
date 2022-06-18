@@ -1,0 +1,73 @@
+# frozen_string_literal: true
+
+render "admin/shared/trix_import"
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+  h2 registration(resource)
+
+  f.inputs "Informações gerais" do
+    f.input :first_name
+    f.input :last_name
+    f.input :name_variation
+    f.input :gender, collection: Person.genders.keys.map { |g| [Person.human_attribute_name("gender.#{g}"), g] }, include_blank: false, input_html: { class: "tom-select-init" }
+    f.input :religion, input_html: { class: "tom-select-init" }
+  end
+
+  columns do
+    column do
+      f.inputs "Nascimento" do
+        f.input :birth_place, as: :select, collection: [survivor.birth_place], input_html: { class: "tom-select-init tom-select-locations" }
+        f.input :birth_date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "tom-select-init" }
+        f.input :birth_date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "tom-select-init" }
+        f.input :birth_date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
+      end
+    end
+    column do
+      f.inputs "Morte" do
+        f.input :death_place, as: :select, collection: [survivor.death_place], input_html: { class: "tom-select-init tom-select-locations" }
+        f.input :death_date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "tom-select-init" }
+        f.input :death_date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "tom-select-init" }
+        f.input :death_date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
+      end
+    end
+  end
+
+  f.inputs "Inserir documento" do
+    f.input :pdf, as: :file, input_html: { accept: "application/pdf" }
+    f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+  end
+
+  f.inputs "Informações familiares" do
+    f.input :mother, input_html: { class: "tom-select-init" }
+    f.input :father, input_html: { class: "tom-select-init" }
+    f.input :spouse, input_html: { class: "tom-select-init" }
+    f.label :family_members
+    f.rich_text_area :family_members
+  end
+
+  f.inputs Survivor.human_attribute_name(:professional_activities) do
+    f.input :academic_formation
+    f.label :professional_activities
+    f.rich_text_area :professional_activities
+  end
+
+  f.inputs Interview.model_name.human(count: 2) do
+    f.has_many :interviews_given, allow_destroy: true, heading: false do |a|
+      a.input :location, collection: [a.object.location], input_html: { class: "tom-select-init tom-select-locations" }
+      a.input :date, as: :date_picker, input_html: { style: "width: 150px" }
+      a.input :interviewer, input_html: { class: "tom-select-init" }
+    end
+  end
+
+  f.inputs "Informações complementares" do
+    f.label :description
+    f.rich_text_area :description
+    br
+    f.label :observation
+    f.rich_text_area :observation
+    br
+  end
+
+  f.actions
+end

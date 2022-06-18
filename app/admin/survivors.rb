@@ -6,7 +6,7 @@ ActiveAdmin.register Survivor do
     :death_date_day, :death_date_month, :death_date_year, :death_place, :first_name,
     :last_name, :name_variation, :gender, :pdf, :family_members, :description, :observation,
     :professional_activities, :religion_id, :mother_id, :father_id, :spouse_id,
-    { images: [], interviews_attributes: %i[id date location interviewer_id _destroy] }
+    { images: [], interviews_given_attributes: %i[id date location interviewer_id _destroy] }
   )
 
   index do
@@ -71,7 +71,7 @@ ActiveAdmin.register Survivor do
           row :registration
           row :name
           row :name_variation
-          row :gender
+          row(:gender) { Person.human_attribute_name("gender.#{survivor.gender}") }
           row(:birth_date) { survivor.date_display(:birth_date) }
           row :birth_place_city
           row :birth_place_state
@@ -142,4 +142,6 @@ ActiveAdmin.register Survivor do
     end
     active_admin_comments
   end
+
+  form partial: "form"
 end

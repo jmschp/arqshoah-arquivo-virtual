@@ -28,6 +28,8 @@ class Person < ApplicationRecord
 
   enum :gender, male: 0, female: 1
 
+  accepts_nested_attributes_for :interviews_given, allow_destroy: true, reject_if: :all_blank
+
   ransack_alias :name, :first_name_or_last_name_or_name_variation
 
   def self.select_options_name

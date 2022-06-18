@@ -54,3 +54,6 @@ pt-BR:
         sibling: Irmão
         spouse: Cônjuge
         registration: Registro
+      person/gender:
+        female: Feminino
+        male: Masculino
