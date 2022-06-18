@@ -6,11 +6,13 @@ ActiveAdmin.register AdminUser do
   permit_params :email, :name, :password, :password_confirmation
 
   action_item :password_change, only: :show, if: proc { current_admin_user.id == params[:id].to_i } do
-    link_to I18n.t(:btn_edit_password), password_change_admin_admin_user_path
+    link_to I18n.t("admin_views.btn_edit_password"), password_change_admin_admin_user_path
   end
 
   member_action :password_change, method: %i[get patch] do
-    redirect_to admin_root_path, alert: I18n.t(:password_change_alert) unless current_admin_user.id == params[:id].to_i
+    unless current_admin_user.id == params[:id].to_i
+      redirect_to admin_root_path, alert: I18n.t("admin_views.password_change_alert")
+    end
 
     if request.patch?
       if resource.update(password: params[:password], password_confirmation: params[:password_confirmation])
