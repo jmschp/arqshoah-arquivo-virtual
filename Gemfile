@@ -56,6 +56,7 @@ gem "bootstrap", "~> 5.1", ">= 5.1.3"
 gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise_invitable", "~> 2.0", ">= 2.0.6"
 gem "geocoder", "~> 1.8"
+gem "paper_trail", "~> 12.3"
 
 group :development, :test do
   gem "awesome_print"
