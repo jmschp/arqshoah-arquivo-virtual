@@ -23,26 +23,31 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
   end
 
-  f.inputs "Cortesia de" do
-    tabs do
-      tab Organization.model_name.human do
-        f.inputs do
-          f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", style: "width: 100%;", class: "tom-select-init", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
-          f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
-        end
-      end
-      tab Person.model_name.human do
-        f.inputs do
-          f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", class: "tom-select-init", style: "width: 100%;", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
-          f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+  columns do
+    column do
+      f.inputs "Cortesia de" do
+        tabs do
+          tab Organization.model_name.human do
+            f.inputs do
+              f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", disabled: !(f.object.donor_type.blank? || f.object.donor_type == "Organization") }
+              f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
+            end
+          end
+          tab Person.model_name.human do
+            f.inputs do
+              f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+              f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+            end
+          end
         end
       end
     end
-  end
-
-  f.inputs "Inserir documento" do
-    f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
-    f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+    column do
+      f.inputs "Inserir documento" do
+        f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
+        f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+      end
+    end
   end
 
   f.inputs "Informações de agência" do
