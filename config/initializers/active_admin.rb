@@ -240,6 +240,9 @@ ActiveAdmin.setup do |config|
         admin.add_logout_button_to_menu sub_menu, 5
       end
     end
+    admin.build_menu do |menu|
+      menu.add id: "auxiliar_records", label: -> { I18n.t "admin_views.menus.auxiliar_records" }, priority: 11
+    end
   end
   #
   # If you wanted to add a static menu item to the default menu provided:
