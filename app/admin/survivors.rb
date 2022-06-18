@@ -22,15 +22,17 @@ ActiveAdmin.register Survivor do
     actions dropdown: true
   end
 
-  # rubocop:disable Metrics/LineLength
   filter :general_search, as: :string, label: "Busca geral"
   filter :name_cont, label: Survivor.human_attribute_name(:name)
-  filter :birth_place_country_eq, collection: Survivor.all.pluck(:birth_place_country), label: Survivor.human_attribute_name(:birth_place_country), input_html: { class: "tom-select-init" }
-  filter :death_place_country_eq, collection: Survivor.all.pluck(:death_place_country), label: Survivor.human_attribute_name(:death_place_country), input_html: { class: "tom-select-init" }
+  filter :birth_place_country_eq, collection: proc { Survivor.all.pluck(:birth_place_country) },
+                                  label: Survivor.human_attribute_name(:birth_place_country),
+                                  input_html: { class: "tom-select-init" }
+  filter :death_place_country_eq, collection: proc { Survivor.all.pluck(:death_place_country) },
+                                  label: Survivor.human_attribute_name(:death_place_country),
+                                  input_html: { class: "tom-select-init" }
   filter :birth_date
   filter :death_date
   filter :religion, input_html: { class: "tom-select-init" }
-  # rubocop:enable Metrics/LineLength
 
   show do
     columns do
