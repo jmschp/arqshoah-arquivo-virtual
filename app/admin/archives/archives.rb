@@ -34,6 +34,17 @@ ActiveAdmin.register Archive do
     actions dropdown: true
   end
 
+  filter :general_search, as: :string, label: "Busca geral"
+  filter :title_cont, label: Archive.human_attribute_name(:title)
+  filter :archive_classification, input_html: { class: "tom-select-init" }
+  filter :archive_type, input_html: { class: "tom-select-init" }
+  filter :language, input_html: { class: "tom-select-init" }
+  filter :date
+  filter :issuing_agency, input_html: { class: "tom-select-init" }
+  filter :receiver_agency, input_html: { class: "tom-select-init" }
+  filter :people_cited, label: "Pessoas citadas", multiple: true, collection: proc { Person.order(:last_name) },
+                        input_html: { class: "tom-select-init" }
+
   show do
     columns do
       column span: 2 do
