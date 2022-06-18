@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Interview < ApplicationRecord
+  include LocationGeocode
+
   belongs_to :interviewed, class_name: "Person", inverse_of: :interviews_given
   belongs_to :interviewer, class_name: "Person", inverse_of: :interviews_made
 
