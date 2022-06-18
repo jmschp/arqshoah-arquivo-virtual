@@ -1,6 +1,6 @@
 function tomSelectInit(selector = ".tom-select-init") {
   document.querySelectorAll(selector).forEach((el) => {
-    const settings = el.classList.contains("location-tom-select") ? locationFetchSettings() : {};
+    const settings = el.classList.contains("tom-select-location") ? locationFetchSettings() : {};
     new TomSelect(el, settings);
   });
 }

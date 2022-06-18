@@ -26,7 +26,7 @@ ActiveAdmin.register Organization do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :location, as: :select, collection: [organization.location], input_html: { class: "tom-select-init location-tom-select" }
+      f.input :location, as: :select, collection: [organization.location], input_html: { class: "tom-select-init tom-select-location" }
     end
     f.actions
   end
