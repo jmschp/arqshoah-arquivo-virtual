@@ -9,6 +9,14 @@ ActiveAdmin.register Survivor do
     { images: [], interviews_given_attributes: %i[id date location interviewer_id _destroy] }
   )
 
+  controller do
+    def show
+      @survivor = Survivor.includes(versions: :item).find(params[:id])
+      @versions = @survivor.versions
+      @survivor = @survivor.versions[params[:version].to_i].reify if params[:version]
+    end
+  end
+
   index do
     selectable_column
     column :registration, sortable: :id do |survivor|
