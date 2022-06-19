@@ -32,11 +32,3 @@ pt-BR:
         receiver_agency: Instituição de destino
         registration: Registro
         survivors: Testemunhos citados
-    errors:
-      models:
-        archive:
-          attributes:
-              date_year:
-                blank: não pode ficar em branco, caso tenha Mês ou Dia
-              date_month:
-                blank: não pode ficar em branco, caso tenha Dia
