@@ -22,10 +22,11 @@ module LocationGeocode
   private
 
   def should_geocode?
-    self.location.present? && self.location_changed?
+    ENV.fetch("SHOULD_GEOCODE", "true") == "true" && self.location.present? && self.location_changed?
   end
 
   def should_reverse_geocode?
-    self.latitude.present? && self.longitude.present? && (self.latitude_changed? || self.longitude_changed?)
+    ENV.fetch("SHOULD_GEOCODE", "true") == "true" && self.latitude.present? && self.longitude.present? &&
+      (self.latitude_changed? || self.longitude_changed?)
   end
 end
