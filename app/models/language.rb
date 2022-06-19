@@ -3,5 +3,5 @@
 class Language < ApplicationRecord
   has_many :archives, inverse_of: :language, dependent: :restrict_with_error
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 end

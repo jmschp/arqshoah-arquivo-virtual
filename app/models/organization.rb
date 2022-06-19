@@ -10,5 +10,5 @@ class Organization < ApplicationRecord
   has_many :received_archives, class_name: "Archive", inverse_of: :receiver_agency, dependent: :restrict_with_error
   # rubocop:enable Metrics/LineLength
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 end
