@@ -14,8 +14,10 @@ class Person < ApplicationRecord
   has_many :citations, inverse_of: :person, dependent: :destroy
   has_many :archive_citation, through: :citations, source: :record, source_type: "Archive"
   has_many :donated_archives, as: :donor, class_name: "Archive", inverse_of: :donor, dependent: :restrict_with_error
+  has_many :donated_iconographies, as: :donor, class_name: "Iconography", inverse_of: :donor, dependent: :restrict_with_error
   has_many :interviews_given, class_name: "Interview", foreign_key: "interviewed_id", inverse_of: :interviewed, dependent: :destroy
   has_many :interviews_made, class_name: "Interview", foreign_key: "interviewer_id", inverse_of: :interviewer, dependent: :destroy
+  has_many :authored_iconographies, class_name: "Iconography", foreign_key: "author_id", inverse_of: :author, dependent: :restrict_with_error
 
   has_one_attached :pdf
   has_many_attached :images

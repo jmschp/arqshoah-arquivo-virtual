@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_19_142139) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_19_145725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,38 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_142139) do
     t.index ["record_type", "record_id"], name: "index_citations_on_record"
   end
 
+  create_table "iconographies", force: :cascade do |t|
+    t.string "registration"
+    t.string "title", null: false
+    t.string "subtitle"
+    t.date "date"
+    t.integer "date_day"
+    t.integer "date_month"
+    t.integer "date_year"
+    t.string "location"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.boolean "original"
+    t.string "donor_type"
+    t.bigint "donor_id"
+    t.bigint "iconography_type_id", null: false
+    t.bigint "iconography_technic_id", null: false
+    t.bigint "iconography_support_id", null: false
+    t.bigint "author_id"
+    t.tsvector "document_ts_vector"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_iconographies_on_author_id"
+    t.index ["document_ts_vector"], name: "index_iconographies_on_document_ts_vector", using: :gin
+    t.index ["donor_type", "donor_id"], name: "index_iconographies_on_donor"
+    t.index ["iconography_support_id"], name: "index_iconographies_on_iconography_support_id"
+    t.index ["iconography_technic_id"], name: "index_iconographies_on_iconography_technic_id"
+    t.index ["iconography_type_id"], name: "index_iconographies_on_iconography_type_id"
+  end
+
   create_table "iconography_supports", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -290,6 +322,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_142139) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "citations", "people"
+  add_foreign_key "iconographies", "iconography_supports"
+  add_foreign_key "iconographies", "iconography_technics"
+  add_foreign_key "iconographies", "iconography_types"
+  add_foreign_key "iconographies", "people", column: "author_id"
   add_foreign_key "interviews", "people", column: "interviewed_id"
   add_foreign_key "interviews", "people", column: "interviewer_id"
   add_foreign_key "people", "people", column: "father_id"

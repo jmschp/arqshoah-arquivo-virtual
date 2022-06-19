@@ -9,8 +9,8 @@ module GetRegistrationName
     #  "RG-PUB"
     #  when Education
     # "RG-EDU"
-    #  when Iconography
-    #  "RG-ICO"
+    when Iconography
+      "RG-ICO"
     #  when Patrimony
     #  "RG-PAT"
     when Savior

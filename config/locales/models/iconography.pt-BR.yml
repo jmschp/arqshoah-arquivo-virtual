@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      iconography: Iconografia
+    attributes:
+      iconography:
+        author: Autor
+        date: Data
+        date_day: Dia
+        date_month: Mês
+        date_year: Ano
+        description: Descrição
+        donor: Cortesia de
+        iconography_technic: Técnica
+        iconography_type: Tipologia
+        iconography_support: Suporte
+        image: Imagem
+        location: Localização
+        observation: Observação
+        original: Original
+        people_cited: Pessoas citadas
+        title: Título
+        registration: Registro
+        subtitle: Subtítulo
