@@ -8,13 +8,13 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs "Informações gerais" do
     f.input :title
-    f.input :document_number, label: "No. Doc."
-    f.input :document_code
-    f.input :page_count, label: "Páginas"
-    f.input :archive_type, input_html: { class: "tom-select-init" }
-    f.input :archive_classification, input_html: { class: "tom-select-init" }
-    f.input :location, as: :select, collection: [archive.location], input_html: { class: "tom-select-init tom-select-location" }
-    f.input :language, input_html: { class: "tom-select-init" }
+    f.input :subtitle
+    f.input :original, as: :radio, label: false, collection: [["Original", true], ["Réplica", false]]
+    f.input :iconography_technic, input_html: { class: "tom-select-init" }
+    f.input :iconography_type, input_html: { class: "tom-select-init" }
+    f.input :iconography_support, input_html: { class: "tom-select-init" }
+    f.input :location, as: :select, collection: [iconography.location], input_html: { class: "tom-select-init tom-select-location" }
+    f.input :author, input_html: { class: "tom-select-init" }
   end
 
   f.inputs "Informações data" do
@@ -43,53 +43,27 @@ active_admin_form_for [:admin, resource] do |f|
       end
     end
     column do
-      f.inputs "Inserir documento" do
-        f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
-        f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+      f.inputs "Inserir imagem" do
+        f.input :image, as: :file, input_html: { accept: "image/*" }
       end
     end
   end
 
-  f.inputs "Informações de agência" do
-    columns do
-      column do
-        f.inputs "Emissor" do
-          f.label :from_name
-          f.input :from_name, label: false
-          f.label :from_role
-          f.input :from_role, label: false
-          f.label :issuing_agency
-          f.input :issuing_agency, label: false, input_html: { class: "tom-select-init" }
-        end
-      end
-      column do
-        f.inputs "Destinatário" do
-          f.label :to_name
-          f.input :to_name, label: false
-          f.label :to_role
-          f.input :to_role, label: false
-          f.label :receiver_agency
-          f.input :receiver_agency, label: false, input_html: { class: "tom-select-init" }
-        end
-      end
-    end
-  end
-
-  f.inputs Archive.human_attribute_name(:people_cited) do
+  f.inputs Iconography.human_attribute_name(:people_cited) do
     columns do
       column do
         f.inputs Survivor.model_name.human do
-          f.input :people_cited, collection: Survivor.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "archive_survivor_ids" }
+          f.input :people_cited, collection: Survivor.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "iconography_survivor_ids" }
         end
       end
       column do
         f.inputs Savior.model_name.human do
-          f.input :people_cited, collection: Savior.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "archive_personality_ids" }
+          f.input :people_cited, collection: Savior.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "iconography_personality_ids" }
         end
       end
       column do
         f.inputs Commoner.model_name.human do
-          f.input :people_cited, collection: Commoner.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "archive_commoner_ids" }
+          f.input :people_cited, collection: Commoner.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "iconography_commoner_ids" }
         end
       end
     end
