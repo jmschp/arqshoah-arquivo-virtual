@@ -105,7 +105,7 @@ puts "Creating saviors"
 
   savior = Savior.new(
     first_name: Faker::Name.first_name,
-    last_name: "#{Faker::Name.last_name} Survivor",
+    last_name: "#{Faker::Name.last_name} Savior",
     name_variation: Faker::Name.name_with_middle,
     birth_date_day: birth_date[:day],
     birth_date_month: birth_date[:month],
@@ -177,5 +177,68 @@ archive_type.each { |name| ArchiveType.create!(name: name) }
     page_count: rand(0...10),
     people_cited: Person.all.sample(rand(1..10))
   )
+end
+
+#=======================================# Iconography #=======================================#
+puts "Creating iconographies"
+
+iconography_technics = [
+  "a oleo", "agua forte", "agua forte e ponta-seca", "aguada", "aquarela", "aquarela e guache", "digital", "gelatina",
+  "gelatina/prata", "grafite", "guache", "impresso", "lapis de cor sob papel cartão", "litografia",
+  "litografia em chapa metálica", "oleo com areia", "ponta-seca", "relevo", "tempera", "tempera e oleo", "tinta bistre",
+  "tinta bistre a pincel", "tinta bistre aguada", "tinta preta", "tinta preta a pena",
+  "tinta preta a pena aguada e aquarela", "tinta preta a pena e aguada", "tinta preta a pena e aquarela",
+  "tinta preta a pena e tinta terra de siena aguada", "tinta preta a pena, aquarela e tinta terra de siena a pincel",
+  "tinta preta a pena, tinta bistre aguada e aquarela", "tinta preta a pena, tinta sepia aguada e guache branco",
+  "tinta preta aguada", "tinta preta e amarela aguadas", "tinta preta e aquarela",
+  "tinta preta e vermelha a pena e aquarela", "tinta sepia", "tinta sepia a pena e aguada", "tinta sepia aguada",
+  "tinta terra de siena a pena", "tinta terra de siena a pena e tinta bistre a pincel e aguada",
+  "tinta terra de siena aguada", "tinta vermelha a pena", "tinta vermelha a pena e tinta preta e amarela aguadas",
+  "xilogravura"
+]
+iconography_technics.each { |name| IconographyTechnic.create!(name: name) }
+
+iconography_types = [
+  "Adesivo", "Aquarela", "Caricatura", "Charge", "Desenho", "Escultura", "Estudo", "Fotografia",
+  "Gravura", "Litografia", "Mapa [rota de fuga]", "Pintura", "Provisório", "Xilografia"
+]
+iconography_types.each { |name| IconographyType.create!(name: name) }
+
+iconography_supports = %w[Alvenaria Bronze Granito Madeira Metal Papel Tecido Tela]
+iconography_supports.each { |name| IconographySupport.create!(name: name) }
+
+images_path = Dir.glob(Rails.root.join("db/images_seed/{*.jpg,*.png}"))
+puts "Creating iconographies without image, setting validate to false" unless images_path.length.positive?
+
+(images_path.length.positive? ? images_path.length : 10).times do |i|
+  date = date_generator
+
+  ico = Iconography.new(
+    title: Faker::GreekPhilosophers.unique.quote,
+    subtitle: Faker::Lorem.sentence(word_count: rand(3..15), supplemental: true),
+    date_day: date[:day],
+    date_month: date[:month],
+    date_year: date[:year],
+    original: [false, true].sample,
+    location: Faker::Address.full_address,
+    description: Faker::Lorem.paragraphs(number: 10).join(" "),
+    observation: Faker::Lorem.paragraphs(number: 10).join(" "),
+    donor: [Organization.all.sample, Person.all.sample].sample,
+    iconography_technic: IconographyTechnic.all.sample,
+    iconography_type: IconographyType.all.sample,
+    iconography_support: IconographySupport.all.sample,
+    people_cited: Person.all.sample(rand(1..10))
+  )
+
+  if images_path.present?
+    ico.image.attach(
+      io: File.open(images_path[i]),
+      filename: File.basename(images_path[i]),
+      content_type: Rack::Mime.mime_type(File.extname(images_path[0]))
+    )
+    ico.save!
+  else
+    ico.save!(validate: false)
+  end
 end
 # rubocop:enable Rails/Output
