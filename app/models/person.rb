@@ -15,8 +15,7 @@ class Person < ApplicationRecord
   has_many :archive_citation, through: :citations, source: :record, source_type: "Archive"
   has_many :donated_archives, as: :donor, class_name: "Archive", inverse_of: :donor, dependent: :restrict_with_error
   has_many :interviews_given, class_name: "Interview", foreign_key: "interviewed_id", inverse_of: :interviewed, dependent: :destroy
-  has_many :interviews_made,  class_name: "Interview", foreign_key: "interviewer_id", inverse_of: :interviewer, dependent: :destroy
-  # rubocop:enable Metrics/LineLength
+  has_many :interviews_made, class_name: "Interview", foreign_key: "interviewer_id", inverse_of: :interviewer, dependent: :destroy
 
   has_one_attached :pdf
   has_many_attached :images
@@ -33,7 +32,18 @@ class Person < ApplicationRecord
   after_validation :geocode_birth_place, if: :should_geocode_birth_place?
   after_validation :geocode_death_place, if: :should_geocode_death_place?
 
+  validates :birth_date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true, unless: -> { self.commoner? }
+  validates :birth_date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { !self.commoner? && self.birth_date_day.present? }
+  validates :birth_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { !self.commoner? && self.birth_date_month.present? || self.birth_date_day.present? }
+  validates :death_date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true, unless: -> { self.commoner? }
+  validates :death_date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { !self.commoner? && self.death_date_day.present? }
+  validates :death_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { !self.commoner? && self.death_date_month.present? || self.death_date_day.present? }
+  validates :first_name, presence: true, length: { maximum: 255 }
+  validates :last_name, presence: true, length: { maximum: 255 }
+  validates :gender, presence: true, unless: -> { self.commoner? }
+
   ransack_alias :name, :first_name_or_last_name_or_name_variation
+  # rubocop:enable Metrics/LineLength
 
   def self.select_options_name
     self.order(:last_name).pluck(:first_name, :last_name, :id).map do |person|
@@ -46,6 +56,10 @@ class Person < ApplicationRecord
   end
 
   private
+
+  def commoner?
+    self.type == "Commoner"
+  end
 
   def create_plain_text
     <<~RECORD
