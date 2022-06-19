@@ -14,7 +14,7 @@ module GetRegistrationName
     #  when Patrimony
     #  "RG-PAT"
     when Savior
-      "RG-PER"
+      "RG-JUS"
     #  when Press
     #  "RG-HEM"
     when Survivor

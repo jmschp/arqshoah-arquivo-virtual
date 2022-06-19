@@ -13,6 +13,6 @@ module Registration
   def set_registration
     registration_name = get_registration_name(self)
 
-    self.update_column(:registration, "#{registration_name}/#{self.id}") # rubocop:disable  Rails/SkipsModelValidations
+    self.update_column(:registration, "#{registration_name}/#{self.id}") # rubocop:disable Rails/SkipsModelValidations
   end
 end
