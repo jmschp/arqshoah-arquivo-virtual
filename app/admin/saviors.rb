@@ -7,6 +7,14 @@ ActiveAdmin.register Savior do
     :observation, :professional_activities, :religion_id, { images: [] }
   )
 
+  controller do
+    def show
+      @savior = Savior.includes(versions: :item).find(params[:id])
+      @versions = @savior.versions
+      @savior = @savior.versions[params[:version].to_i].reify if params[:version]
+    end
+  end
+
   index do
     selectable_column
     column :registration, sortable: :id do |savior|
