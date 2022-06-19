@@ -7,6 +7,6 @@ class AddObjectChangesToVersions < ActiveRecord::Migration[7.0]
   TEXT_BYTES = 1_073_741_823
 
   def change
-    add_column :versions, :object_changes, :jsonb #, limit: TEXT_BYTES
+    add_column :versions, :object_changes, :jsonb # , limit: TEXT_BYTES
   end
 end

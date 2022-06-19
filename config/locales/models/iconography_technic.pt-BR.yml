@@ -1,0 +1,7 @@
+pt-BR:
+  activerecord:
+    models:
+      iconography_technic: Suporte de Iconografia
+    attributes:
+      iconography_technic:
+        name: Nome

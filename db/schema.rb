@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_18_154654) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_19_142139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,6 +167,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_154654) do
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_citations_on_person_id"
     t.index ["record_type", "record_id"], name: "index_citations_on_record"
+  end
+
+  create_table "iconography_supports", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_iconography_supports_on_name", unique: true
+  end
+
+  create_table "iconography_technics", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_iconography_technics_on_name", unique: true
+  end
+
+  create_table "iconography_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_iconography_types_on_name", unique: true
   end
 
   create_table "interviews", force: :cascade do |t|
