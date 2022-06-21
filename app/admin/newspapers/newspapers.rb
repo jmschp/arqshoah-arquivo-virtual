@@ -92,4 +92,6 @@ ActiveAdmin.register Newspaper do
 
     active_admin_comments
   end
+
+  form partial: "form"
 end
