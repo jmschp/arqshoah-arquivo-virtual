@@ -241,4 +241,30 @@ puts "Creating iconographies without image, setting validate to false" unless im
     ico.save!(validate: false)
   end
 end
+
+#=======================================# Press #=======================================#
+puts "Creating presses"
+
+newspaper_type = %w[Artigo Cronica Entrevista Noticia Resenha Informe Carta]
+newspaper_type.each { |type| NewspaperType.create!(name: type) }
+
+5.times do
+  date = date_generator
+
+  Newspaper.create!(
+    title: Faker::Lorem.unique.words(number: rand(4..8)).join(" "),
+    location: Faker::Address.full_address,
+    date_day: date[:day],
+    date_month: date[:month],
+    date_year: date[:year],
+    print_number: Faker::Lorem.sentence(word_count: rand(1...3), supplemental: true),
+    agency: Organization.all.sample,
+    newspaper_type: NewspaperType.all.sample,
+    language: Language.all.sample,
+    author: Commoner.all.sample,
+    description: Faker::Lorem.paragraphs(number: 10).join(" "),
+    observation: Faker::Lorem.paragraphs(number: 10).join(" "),
+    people_cited: Person.all.sample(rand(1..10))
+  )
+end
 # rubocop:enable Rails/Output
