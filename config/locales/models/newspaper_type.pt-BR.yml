@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      newspaper_type:
+        one: Tipologia de Hemeroteca
+        other: Tipologias de Hemeroteca
+    attributes:
+      newspaper_type:
+        name: Nome

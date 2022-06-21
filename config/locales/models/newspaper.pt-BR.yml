@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      newspaper:
+        one: Periódico
+        other: Hemeroteca
+    attributes:
+      newspaper:
+        author: Autor / Jornalista
+        date: Data
+        description: Síntese
+        image: Imagem
+        language: Idioma
+        location: Localização
+        observation: Observação
+        pdf: Anexo PDF
+        agency: Agência de notícias
+        newspaper_type: Tipologia
+        print_number: Número da edição
+        title: Título
+        registration: Registro
