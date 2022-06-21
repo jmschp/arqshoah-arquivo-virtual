@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+panel record.class.human_attribute_name(:people_cited) do
+  columns do
+    column do
+      panel Survivor.model_name.human do
+        table_for record.survivors_citations do
+          column :name
+        end
+      end
+    end
+    column do
+      panel Savior.model_name.human do
+        table_for record.savior_citations do
+          column :name
+        end
+      end
+    end
+    column do
+      panel Commoner.model_name.human do
+        table_for record.commoners_citations do
+          column :name
+        end
+      end
+    end
+  end
+end

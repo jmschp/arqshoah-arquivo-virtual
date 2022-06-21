@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+panel record.class.human_attribute_name(:description) do
+  record.description
+end
+
+panel record.class.human_attribute_name(:observation) do
+  record.observation
+end

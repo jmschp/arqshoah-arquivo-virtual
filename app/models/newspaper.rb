@@ -7,6 +7,8 @@ class Newspaper < ApplicationRecord
   include PeopleCitations
   include Registration
 
+  has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
+
   belongs_to :newspaper_type, inverse_of: :newspapers
   belongs_to :author, class_name: "Person", inverse_of: :authored_newspapers, optional: true
   belongs_to :agency, class_name: "Organization", inverse_of: :published_newspapers, optional: true
