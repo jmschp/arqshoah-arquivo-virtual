@@ -8,6 +8,7 @@ class Organization < ApplicationRecord
   has_many :donated_iconographies, as: :donor, class_name: "Iconography", inverse_of: :donor, dependent: :restrict_with_error
   has_many :issued_archives, class_name: "Archive", inverse_of: :issuing_agency, dependent: :restrict_with_error
   has_many :received_archives, class_name: "Archive", inverse_of: :receiver_agency, dependent: :restrict_with_error
+  has_many :published_newspapers, class_name: "Newspaper", inverse_of: :agency, foreign_key: :agency_id, dependent: :restrict_with_error
   # rubocop:enable Metrics/LineLength
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }

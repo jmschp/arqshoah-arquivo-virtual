@@ -15,8 +15,8 @@ module GetRegistrationName
     #  "RG-PAT"
     when Savior
       "RG-JUS"
-    #  when Press
-    #  "RG-HEM"
+    when Newspaper
+      "RG-HEM"
     when Survivor
       "RG-TES"
     end

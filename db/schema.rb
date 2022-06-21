@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_19_145725) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_181402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -245,6 +245,40 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_145725) do
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
+  create_table "newspaper_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_newspaper_types_on_name", unique: true
+  end
+
+  create_table "newspapers", force: :cascade do |t|
+    t.string "registration"
+    t.string "title", null: false
+    t.string "location"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "latitude"
+    t.string "longitude"
+    t.date "date"
+    t.integer "date_day"
+    t.integer "date_month"
+    t.integer "date_year"
+    t.string "print_number"
+    t.bigint "newspaper_type_id", null: false
+    t.bigint "author_id"
+    t.bigint "agency_id"
+    t.bigint "language_id"
+    t.tsvector "document_ts_vector"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agency_id"], name: "index_newspapers_on_agency_id"
+    t.index ["author_id"], name: "index_newspapers_on_author_id"
+    t.index ["language_id"], name: "index_newspapers_on_language_id"
+    t.index ["newspaper_type_id"], name: "index_newspapers_on_newspaper_type_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.string "location"
@@ -328,6 +362,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_145725) do
   add_foreign_key "iconographies", "people", column: "author_id"
   add_foreign_key "interviews", "people", column: "interviewed_id"
   add_foreign_key "interviews", "people", column: "interviewer_id"
+  add_foreign_key "newspapers", "languages"
+  add_foreign_key "newspapers", "newspaper_types"
+  add_foreign_key "newspapers", "organizations", column: "agency_id"
+  add_foreign_key "newspapers", "people", column: "author_id"
   add_foreign_key "people", "people", column: "father_id"
   add_foreign_key "people", "people", column: "mother_id"
   add_foreign_key "people", "people", column: "spouse_id"
