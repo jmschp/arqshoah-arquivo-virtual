@@ -6,54 +6,54 @@ active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
   h2 registration(resource)
 
-  f.inputs "Informações gerais" do
-    f.input :title
-    f.input :document_number, label: "No. Doc."
-    f.input :document_code
-    f.input :page_count, label: "Páginas"
-    f.input :archive_type, input_html: { class: "tom-select-init" }
-    f.input :archive_classification, input_html: { class: "tom-select-init" }
-    f.input :location, as: :select, collection: [archive.location], input_html: { class: "tom-select-init tom-select-location" }
-    f.input :language, input_html: { class: "tom-select-init" }
-  end
-
-  f.inputs "Informações data" do
-    f.input :date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "tom-select-init" }
-    f.input :date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "tom-select-init" }
-    f.input :date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
-  end
-
   columns do
     column do
-      f.inputs "Cortesia de" do
-        tabs do
-          tab Organization.model_name.human do
-            f.inputs do
-              f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", disabled: !(f.object.donor_type.blank? || f.object.donor_type == "Organization") }
-              f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
-            end
-          end
-          tab Person.model_name.human do
-            f.inputs do
-              f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
-              f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
-            end
-          end
-        end
+      f.inputs Archive.human_attribute_name(:general_information) do
+        f.input :title
+        f.input :document_number
+        f.input :document_code
+        f.input :page_count
+        f.input :archive_type, input_html: { class: "tom-select-init" }
+        f.input :archive_classification, input_html: { class: "tom-select-init" }
+        f.input :location, as: :select, collection: [archive.location], input_html: { class: "tom-select-init tom-select-location" }
+        f.input :language, input_html: { class: "tom-select-init" }
       end
     end
     column do
-      f.inputs "Inserir documento" do
-        f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
+      f.inputs Archive.human_attribute_name(:date) do
+        f.input :date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "tom-select-init" }
+        f.input :date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "tom-select-init" }
+        f.input :date_year, hint: t("admin_views.year_hint"), input_html: { min: 1000, max: 9999 }
+      end
+
+      f.inputs Archive.human_attribute_name(:upload_documents) do
+        f.input :pdf, as: :file, input_html: { accept: "application/pdf" }
         f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
       end
     end
   end
 
-  f.inputs "Informações de agência" do
+  f.inputs Archive.human_attribute_name(:donor) do
+    tabs do
+      tab Organization.model_name.human do
+        f.inputs do
+          f.input :donor, collection: Organization.order(:name).pluck(:name, :id), label: false, input_html: { id: "donor_organization_id", disabled: !(f.object.donor_type.blank? || f.object.donor_type == "Organization") }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_organization_type", value: "Organization", disabled: !(f.object.donor_type.nil? || f.object.donor_type == "Organization") }
+        end
+      end
+      tab Person.model_name.human do
+        f.inputs do
+          f.input :donor, collection: Person.select_options_name, label: false, input_html: { id: "donor_person_id", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+          f.input :donor_type, as: :hidden, input_html: { id: "donor_person_type", value: "Person", disabled: !(f.object.donor_type.present? && f.object.donor_type == "Person") }
+        end
+      end
+    end
+  end
+
+  f.inputs Archive.human_attribute_name(:institutions) do
     columns do
       column do
-        f.inputs "Emissor" do
+        f.inputs Archive.human_attribute_name(:issuing_agency) do
           f.label :from_name
           f.input :from_name, label: false
           f.label :from_role
@@ -63,7 +63,7 @@ active_admin_form_for [:admin, resource] do |f|
         end
       end
       column do
-        f.inputs "Destinatário" do
+        f.inputs Archive.human_attribute_name(:receiver_agency) do
           f.label :to_name
           f.input :to_name, label: false
           f.label :to_role
@@ -95,7 +95,7 @@ active_admin_form_for [:admin, resource] do |f|
     end
   end
 
-  f.inputs "Informações complementares" do
+  f.inputs Archive.human_attribute_name(:additional_information) do
     f.label :description
     f.rich_text_area :description
     br

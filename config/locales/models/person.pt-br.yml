@@ -16,6 +16,7 @@ pt-BR:
     attributes:
       person:
         academic_formation: Formação acadêmica
+        birth: Nascimento
         birth_date: Data de nascimento
         birth_date_day: Dia de nascimento
         birth_date_month: Mês de nascimento
@@ -24,6 +25,7 @@ pt-BR:
         birth_place_state: Estado de nascimento
         birth_place_country: País de nascimento
         birth_place: Local de nascimento
+        death: Morte
         death_date: Data de falecimento
         death_date_day: Dia de falecimento
         death_date_month: Mês de falecimento

@@ -2,5 +2,6 @@ pt-BR:
   admin_views:
     password_change_alert: Você não pode editar a senha de outro usuário
     btn_edit_password: Editar senha
+    year_hint: "ano com 4 dígitos, ex: 1983"
     menus:
       auxiliar_records: Outros

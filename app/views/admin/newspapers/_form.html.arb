@@ -8,7 +8,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   columns do
     column do
-      f.inputs "Informações gerais" do
+      f.inputs Newspaper.human_attribute_name(:general_information) do
         f.input :title
         f.input :newspaper_type, input_html: { class: "tom-select-init" }
         f.input :location, as: :select, collection: [resource.location], input_html: { class: "tom-select-init tom-select-location" }
@@ -18,15 +18,14 @@ active_admin_form_for [:admin, resource] do |f|
         f.input :author, input_html: { class: "tom-select-init" }
       end
     end
-
     column do
-      f.inputs "Informações data" do
+      f.inputs Newspaper.human_attribute_name(:date) do
         f.input :date_day, as: :select, collection: DateDisplay::DAYS, required: false, input_html: { class: "tom-select-init" }
         f.input :date_month, as: :select, collection: DateDisplay::MONTHS, input_html: { class: "tom-select-init" }
-        f.input :date_year, hint: "ano com 4 dígitos, ex: 1983", input_html: { min: 1000, max: 9999 }
+        f.input :date_year, hint: t("admin_views.year_hint"), input_html: { min: 1000, max: 9999 }
       end
-      f.inputs "Inserir documento" do
-        f.input :pdf, as: :file, input_html: { accept: "application/pdf", class: "form-control" }
+      f.inputs Newspaper.human_attribute_name(:upload_documents) do
+        f.input :pdf, as: :file, input_html: { accept: "application/pdf" }
         f.input :image, as: :file, input_html: { accept: "image/*" }
       end
     end
@@ -52,7 +51,7 @@ active_admin_form_for [:admin, resource] do |f|
     end
   end
 
-  f.inputs "Informações complementares" do
+  f.inputs Newspaper.human_attribute_name(:additional_information) do
     f.label :description
     f.rich_text_area :description
     br

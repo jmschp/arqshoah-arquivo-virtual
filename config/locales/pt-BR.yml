@@ -7,13 +7,16 @@ pt-BR:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
   attributes:
+    additional_information: Informações complementares
     created_at: Criado em
-    updated_at: Atualizado em
+    general_information: Informações gerais
     city: Cidade
     state: Estado
     country: País
     people_cited: Pessoas citadas
     versions: Versões
+    upload_documents: Carregar documentos
+    updated_at: Atualizado em
   date:
     abbr_day_names:
       - dom

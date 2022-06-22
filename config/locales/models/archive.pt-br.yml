@@ -14,7 +14,7 @@ pt-BR:
         date_day: Dia
         description: Descrição
         document_code: Código
-        document_number: Número
+        document_number: No. Doc.
         donor: Cortesia de
         from_name: De
         from_role: Cargo
@@ -23,7 +23,7 @@ pt-BR:
         issuing_agency: Instituição de origem
         language: Idioma
         location: Localização
-        page_count: Total de Páginas
+        page_count: Páginas
         pdf: Anexo PDF
         observation: Observação
         tags: Palavras-chave
