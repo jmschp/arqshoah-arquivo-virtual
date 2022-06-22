@@ -13,6 +13,7 @@ pt-BR:
     state: Estado
     country: País
     people_cited: Pessoas citadas
+    versions: Versões
   date:
     abbr_day_names:
       - dom

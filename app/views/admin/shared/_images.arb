@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+if record.respond_to?(:images) && record.images.present?
+  panel record.class.human_attribute_name(:images) do
+    div class: "admin-show-images" do
+      record.images.each do |image|
+        div do
+          link_to(rails_blob_path(image, disposition: "inline"), target: :_blank, rel: :noopener) do
+            image_tag(image.variant(resize_to_fill: [200, 250, { crop: :attention }]))
+          end
+        end
+      end
+    end
+  end
+elsif record.respond_to?(:image) && record.image.present?
+  panel "Imagens do Arquivo", class: "admin-show-image" do
+    link_to(rails_blob_path(record.image, disposition: "inline"), target: :_blank, rel: :noopener) do
+      image_tag(record.image)
+    end
+  end
+else
+  panel record.class.human_attribute_name(:images) do
+    div class: "admin-show-image" do
+      image_tag("arqshoah-logo.png")
+    end
+  end
+end

@@ -33,7 +33,8 @@ pt-BR:
         death_place_country: País de falecimento
         death_place: Local da falecimento
         description: Descrição
-        family_members: Família
+        family: Família
+        other_family_members: Outros membros da família
         father: Pai
         first_name: Primeiro nome
         gender: Gênero

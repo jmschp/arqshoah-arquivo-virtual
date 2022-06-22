@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+panel record.class.human_attribute_name(:pdf) do
+  if record.pdf.present?
+    text_node(link_to("Abrir", rails_blob_path(record.pdf, disposition: "inline"), target: :_blank, rel: :noopener))
+    render "active_storage/blobs/blob", { blob: record.pdf, size: [150, 200] }
+  else
+    text_node "sem anexo"
+  end
+end

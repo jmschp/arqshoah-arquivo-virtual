@@ -23,7 +23,7 @@ class Person < ApplicationRecord
   has_one_attached :pdf
   has_many_attached :images
 
-  has_rich_text :family_members
+  has_rich_text :other_family_members
   has_rich_text :professional_activities
   has_rich_text :description
   has_rich_text :observation
@@ -75,7 +75,7 @@ class Person < ApplicationRecord
       #{self.spouse&.name}
       #{self.mother&.name}
       #{self.father&.name}
-      #{self.family_members.to_plain_text}
+      #{self.other_family_members.to_plain_text}
       #{self.professional_activities.to_plain_text}
       #{self.description.to_plain_text}
       #{self.observation.to_plain_text}

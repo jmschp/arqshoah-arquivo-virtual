@@ -47,8 +47,8 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :mother, input_html: { class: "tom-select-init" }
     f.input :father, input_html: { class: "tom-select-init" }
     f.input :spouse, input_html: { class: "tom-select-init" }
-    f.label :family_members
-    f.rich_text_area :family_members
+    f.label :other_family_members
+    f.rich_text_area :other_family_members
   end
 
   f.inputs Survivor.human_attribute_name(:professional_activities) do

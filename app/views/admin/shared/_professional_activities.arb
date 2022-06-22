@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+panel record.class.human_attribute_name(:professional_activities) do
+  para do
+    sanitize(
+      "<strong>#{record.class.human_attribute_name(:academic_formation)}:</strong> #{record.academic_formation}",
+      { tags: %w[strong] }
+    )
+  end
+  div do
+    record.professional_activities
+  end
+end

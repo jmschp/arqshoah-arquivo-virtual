@@ -48,34 +48,10 @@ ActiveAdmin.register Archive do
   show do
     columns do
       column span: 2 do
-        panel "Imagens do Arquivo" do
-          if archive.images.present?
-            div class: "admin-show-images" do
-              archive.images.each do |image|
-                div do
-                  link_to rails_blob_path(image, disposition: "inline"), target: :_blank, rel: :noopener do
-                    image_tag image.variant(resize_to_fill: [200, 250, { crop: :attention }])
-                  end
-                end
-              end
-            end
-          else
-            div class: "admin-show-image" do
-              image_tag "arqshoah-logo.png"
-            end
-          end
-        end
+        render "admin/shared/images", { record: archive }
       end
       column do
-        panel Archive.human_attribute_name(:pdf) do
-          if archive.pdf.present?
-            text_node link_to("Abrir", rails_blob_path(archive.pdf, disposition: "inline"), target: :_blank,
-                                                                                            rel: :noopener)
-            render "active_storage/blobs/blob", blob: archive.pdf, size: [150, 200]
-          else
-            text_node "sem anexo"
-          end
-        end
+        render "admin/shared/pdf", { record: archive }
       end
       column span: 2 do
         attributes_table do
@@ -95,13 +71,13 @@ ActiveAdmin.register Archive do
         end
       end
       column do
-        panel "Versões" do
+        panel Archive.human_attribute_name(:versions) do
           render partial: "admin/shared/version"
         end
       end
     end
 
-    panel "Informações sobre Instituições" do
+    panel Archive.human_attribute_name(:institutions) do
       columns do
         column do
           attributes_table title: "Emissor" do
@@ -120,38 +96,9 @@ ActiveAdmin.register Archive do
       end
     end
 
-    panel Archive.human_attribute_name(:people_cited) do
-      columns do
-        column do
-          panel Survivor.model_name.human do
-            table_for archive.survivors_citations do
-              column :name
-            end
-          end
-        end
-        column do
-          panel Savior.model_name.human do
-            table_for archive.savior_citations do
-              column :name
-            end
-          end
-        end
-        column do
-          panel Commoner.model_name.human do
-            table_for archive.commoners_citations do
-              column :name
-            end
-          end
-        end
-      end
-    end
+    render "admin/shared/people_cited", { record: archive }
+    render "admin/shared/extra_info", { record: archive }
 
-    panel Archive.human_attribute_name(:description) do
-      archive.description
-    end
-    panel Archive.human_attribute_name(:observation) do
-      archive.observation
-    end
     active_admin_comments
   end
 

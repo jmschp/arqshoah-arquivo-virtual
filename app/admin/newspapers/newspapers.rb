@@ -43,29 +43,10 @@ ActiveAdmin.register Newspaper do
   show do
     columns do
       column span: 2 do
-        panel "Imagem", class: "admin-show-image" do
-          if newspaper.image.present?
-            link_to rails_blob_path(newspaper.image, disposition: "inline"), target: :_blank, rel: :noopener do
-              image_tag newspaper.image
-            end
-          else
-            div class: "admin-show-image" do
-              image_tag "arqshoah-logo.png"
-            end
-          end
-        end
+        render "admin/shared/images", { record: newspaper }
       end
       column do
-        panel Newspaper.human_attribute_name(:pdf) do
-          if newspaper.pdf.present?
-            text_node link_to(
-              "Abrir", rails_blob_path(newspaper.pdf, disposition: "inline"), target: :_blank, rel: :noopener
-            )
-            render "active_storage/blobs/blob", blob: newspaper.pdf, size: [150, 200]
-          else
-            text_node "sem anexo"
-          end
-        end
+        render "admin/shared/pdf", { record: newspaper }
       end
       column span: 2 do
         attributes_table do
@@ -81,7 +62,7 @@ ActiveAdmin.register Newspaper do
         end
       end
       column do
-        panel "Versões" do
+        panel Newspaper.human_attribute_name(:versions) do
           render partial: "admin/shared/version"
         end
       end

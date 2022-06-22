@@ -43,34 +43,10 @@ ActiveAdmin.register Savior do
   show do
     columns do
       column span: 2 do
-        panel Savior.human_attribute_name(:images) do
-          if savior.images.present?
-            div class: "admin-show-images" do
-              savior.images.each do |image|
-                div do
-                  link_to rails_blob_path(image, disposition: "inline"), target: :_blank, rel: :noopener do
-                    image_tag image.variant(resize_to_fill: [200, 250, { crop: :attention }])
-                  end
-                end
-              end
-            end
-          else
-            div class: "admin-show-image" do
-              image_tag "arqshoah-logo.png"
-            end
-          end
-        end
+        render "admin/shared/images", { record: savior }
       end
       column do
-        panel Savior.human_attribute_name(:pdf) do
-          if savior.pdf.present?
-            text_node link_to("Abrir", rails_blob_path(savior.pdf, disposition: "inline"), target: :_blank,
-                                                                                           rel: :noopener)
-            render "active_storage/blobs/blob", blob: savior.pdf, size: [150, 200]
-          else
-            text_node "sem anexo"
-          end
-        end
+        render "admin/shared/pdf", { record: savior }
       end
       column span: 2 do
         attributes_table do
@@ -89,30 +65,15 @@ ActiveAdmin.register Savior do
         end
       end
       column do
-        panel "Versões" do
+        panel Savior.human_attribute_name(:versions) do
           render partial: "admin/shared/version"
         end
       end
     end
 
-    panel Savior.human_attribute_name(:professional_activities) do
-      para do
-        sanitize(
-          "<strong>#{Savior.human_attribute_name(:academic_formation)}:</strong> #{savior.academic_formation}",
-          { tags: %w[strong] }
-        )
-      end
-      div do
-        savior.professional_activities
-      end
-    end
+    render "admin/shared/professional_activities", { record: savior }
+    render "admin/shared/extra_info", { record: savior }
 
-    panel Savior.human_attribute_name(:description) do
-      savior.description
-    end
-    panel Savior.human_attribute_name(:observation) do
-      savior.observation
-    end
     active_admin_comments
   end
 

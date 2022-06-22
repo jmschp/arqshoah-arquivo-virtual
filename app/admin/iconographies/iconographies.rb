@@ -46,12 +46,7 @@ ActiveAdmin.register Iconography do
     h2 iconography.subtitle
     columns do
       column span: 3 do
-        panel "Imagens do Arquivo", class: "admin-show-image" do
-          link_to rails_blob_path(iconography.image, disposition: "inline"), target: :_blank,
-                                                                             rel: :noopener do
-            image_tag iconography.image
-          end
-        end
+        render "admin/shared/images", { record: iconography }
       end
       column span: 2 do
         attributes_table do
@@ -69,44 +64,14 @@ ActiveAdmin.register Iconography do
         end
       end
       column do
-        panel "Versões" do
+        panel Iconography.human_attribute_name(:versions) do
           render partial: "admin/shared/version"
         end
       end
     end
 
-    panel Iconography.human_attribute_name(:people_cited) do
-      columns do
-        column do
-          panel Survivor.model_name.human do
-            table_for iconography.survivors_citations do
-              column :name
-            end
-          end
-        end
-        column do
-          panel Savior.model_name.human do
-            table_for iconography.savior_citations do
-              column :name
-            end
-          end
-        end
-        column do
-          panel Commoner.model_name.human do
-            table_for iconography.commoners_citations do
-              column :name
-            end
-          end
-        end
-      end
-    end
-
-    panel Archive.human_attribute_name(:description) do
-      iconography.description
-    end
-    panel Archive.human_attribute_name(:observation) do
-      iconography.observation
-    end
+    render "admin/shared/people_cited", { record: iconography }
+    render "admin/shared/extra_info", { record: iconography }
 
     active_admin_comments
   end
