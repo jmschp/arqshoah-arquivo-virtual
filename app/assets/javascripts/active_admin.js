@@ -7,3 +7,7 @@ window.addEventListener("load", () => {
   donorSwitch();
   tomSelectInit();
 });
+
+$(document).on("has_many_add:after", () => {
+  tomSelectInit();
+});

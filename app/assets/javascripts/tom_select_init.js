@@ -1,7 +1,10 @@
-function tomSelectInit(selector = ".tom-select-init") {
+function tomSelectInit(selector = "select.tom-select-init") {
   document.querySelectorAll(selector).forEach((el) => {
     const settings = el.classList.contains("tom-select-location") ? locationFetchSettings() : {};
-    new TomSelect(el, settings);
+    if (!el.classList.contains("tom-select-initialized")) {
+      new TomSelect(el, settings);
+      el.classList.add("tom-select-initialized")
+    }
   });
 }
 
