@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_191447) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_24_151806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -228,6 +228,58 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_191447) do
     t.index ["record_type", "record_id"], name: "index_citations_on_record"
   end
 
+  create_table "education_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_education_categories_on_name", unique: true
+  end
+
+  create_table "education_organizers", force: :cascade do |t|
+    t.bigint "education_id", null: false
+    t.bigint "organizer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["education_id"], name: "index_education_organizers_on_education_id"
+    t.index ["organizer_id"], name: "index_education_organizers_on_organizer_id"
+  end
+
+  create_table "education_promoter_institutions", force: :cascade do |t|
+    t.bigint "education_id", null: false
+    t.bigint "promoter_institution_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["education_id"], name: "index_education_promoter_institutions_on_education_id"
+    t.index ["promoter_institution_id"], name: "index_edu_promo_inst_on_promoter_institution_id"
+  end
+
+  create_table "education_supporters", force: :cascade do |t|
+    t.string "donor_type", null: false
+    t.bigint "donor_id", null: false
+    t.bigint "education_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["donor_type", "donor_id"], name: "index_education_supporters_on_donor"
+    t.index ["education_id"], name: "index_education_supporters_on_education_id"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string "registration"
+    t.string "title", null: false
+    t.string "target_public"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "online", default: false, null: false
+    t.string "record_link"
+    t.bigint "education_category_id", null: false
+    t.bigint "venue_id", null: false
+    t.tsvector "document_ts_vector"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["education_category_id"], name: "index_educations_on_education_category_id"
+    t.index ["venue_id"], name: "index_educations_on_venue_id"
+  end
+
   create_table "iconographies", force: :cascade do |t|
     t.string "registration"
     t.string "title", null: false
@@ -425,6 +477,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_191447) do
   add_foreign_key "books", "languages"
   add_foreign_key "books", "organizations", column: "publishing_company_id"
   add_foreign_key "citations", "people"
+  add_foreign_key "education_organizers", "educations"
+  add_foreign_key "education_organizers", "people", column: "organizer_id"
+  add_foreign_key "education_promoter_institutions", "educations"
+  add_foreign_key "education_promoter_institutions", "organizations", column: "promoter_institution_id"
+  add_foreign_key "education_supporters", "educations"
+  add_foreign_key "educations", "education_categories"
+  add_foreign_key "educations", "organizations", column: "venue_id"
   add_foreign_key "iconographies", "iconography_supports"
   add_foreign_key "iconographies", "iconography_technics"
   add_foreign_key "iconographies", "iconography_types"

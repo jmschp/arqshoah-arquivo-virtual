@@ -22,6 +22,11 @@ class Person < ApplicationRecord
   has_many :interviews_given, class_name: "Interview", foreign_key: "interviewed_id", inverse_of: :interviewed, dependent: :destroy
   has_many :interviews_made, class_name: "Interview", foreign_key: "interviewer_id", inverse_of: :interviewer, dependent: :destroy
 
+  has_many :education_organizers, inverse_of: :organizer, foreign_key: :organizer_id, dependent: :destroy
+  has_many :organized_educations, through: :education_organizers, source: :education
+  has_many :education_supporters, as: :donor, inverse_of: :donor, dependent: :destroy
+  has_many :supported_education, through: :education_supporters, source: :education
+
   has_one_attached :pdf
   has_many_attached :images
 
