@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_21_181402) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_23_191447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -157,6 +157,65 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_181402) do
     t.index ["language_id"], name: "index_archives_on_language_id"
     t.index ["receiver_agency_id"], name: "index_archives_on_receiver_agency_id"
     t.index ["title"], name: "index_archives_on_title", unique: true
+  end
+
+  create_table "book_authors", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_book_authors_on_author_id"
+    t.index ["book_id"], name: "index_book_authors_on_book_id"
+  end
+
+  create_table "book_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_book_categories_on_name", unique: true
+  end
+
+  create_table "book_fields", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_book_fields_on_name", unique: true
+  end
+
+  create_table "book_iconographies", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "iconography_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_iconographies_on_book_id"
+    t.index ["iconography_id"], name: "index_book_iconographies_on_iconography_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "registration"
+    t.string "title", null: false
+    t.string "subtitle"
+    t.integer "edition"
+    t.string "isbn"
+    t.integer "pages"
+    t.integer "publishing_year"
+    t.string "location"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "book_category_id", null: false
+    t.bigint "book_field_id", null: false
+    t.bigint "language_id"
+    t.bigint "publishing_company_id"
+    t.tsvector "document_ts_vector"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_category_id"], name: "index_books_on_book_category_id"
+    t.index ["book_field_id"], name: "index_books_on_book_field_id"
+    t.index ["language_id"], name: "index_books_on_language_id"
+    t.index ["publishing_company_id"], name: "index_books_on_publishing_company_id"
   end
 
   create_table "citations", force: :cascade do |t|
@@ -355,6 +414,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_181402) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_authors", "books"
+  add_foreign_key "book_authors", "people", column: "author_id"
+  add_foreign_key "book_iconographies", "books"
+  add_foreign_key "book_iconographies", "iconographies"
+  add_foreign_key "books", "book_categories"
+  add_foreign_key "books", "book_fields"
+  add_foreign_key "books", "languages"
+  add_foreign_key "books", "organizations", column: "publishing_company_id"
   add_foreign_key "citations", "people"
   add_foreign_key "iconographies", "iconography_supports"
   add_foreign_key "iconographies", "iconography_technics"

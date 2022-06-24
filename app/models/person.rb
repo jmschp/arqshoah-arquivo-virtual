@@ -11,6 +11,8 @@ class Person < ApplicationRecord
   belongs_to :spouse, class_name: "Person", optional: true
   belongs_to :religion, optional: true
 
+  has_many :book_authors, foreign_key: "author_id", inverse_of: :author, dependent: :destroy
+  has_many :authored_books, through: :book_authors
   has_many :authored_iconographies, class_name: "Iconography", foreign_key: "author_id", inverse_of: :author, dependent: :restrict_with_error
   has_many :authored_newspapers, class_name: "Newspaper", foreign_key: "author_id", inverse_of: :author, dependent: :restrict_with_error
   has_many :citations, inverse_of: :person, dependent: :destroy

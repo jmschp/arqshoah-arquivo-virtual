@@ -15,6 +15,8 @@ class Iconography < ApplicationRecord
   belongs_to :iconography_technic, inverse_of: :iconographies
   belongs_to :iconography_type, inverse_of: :iconographies
 
+  has_many :book_iconographies, inverse_of: :iconography, dependent: :destroy
+  has_many :books, through: :book_iconographies
   has_many :citations, as: :record, inverse_of: :record, dependent: :destroy
   has_many :people_cited, through: :citations, source: :person
 

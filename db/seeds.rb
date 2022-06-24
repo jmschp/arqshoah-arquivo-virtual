@@ -267,4 +267,38 @@ newspaper_type.each { |type| NewspaperType.create!(name: type) }
     people_cited: Person.all.sample(rand(1..10))
   )
 end
+
+#=======================================# Book #=======================================#
+puts "Creating books"
+
+book_filed = %w[Antropologia Direito Historia Iconografia Literatura Medicina Psicanalise Sociologia]
+
+book_filed.each { |field| BookField.create!(name: field) }
+
+book_categories = [
+  "Autobiografia", "Biografia", "Catraca Livre", "Coletânea de entrevistas", "Cronica",
+  "Historiografia", "Livro de Memorias", "Poesia", "Romance Ficção", "Romance Histórico", "Testemunho"
+]
+
+book_categories.each { |book_category| BookCategory.create!(name: book_category) }
+
+5.times do
+  Book.create!(
+    title: Faker::Book.unique.title,
+    subtitle: Faker::Lorem.sentence(word_count: rand(1...15), supplemental: true),
+    isbn: Faker::Code.unique.isbn,
+    edition: Faker::Lorem.sentence(word_count: rand(1...3), supplemental: true),
+    location: Faker::Address.full_address,
+    publishing_year: rand(1950...2020),
+    publishing_company: Organization.all.sample,
+    book_category: BookCategory.all.sample,
+    book_field: BookField.all.sample,
+    language: Language.all.sample,
+    description: Faker::Lorem.paragraphs(number: 10).join(" "),
+    observation: Faker::Lorem.paragraphs(number: 10).join(" "),
+    people_cited: Person.all.sample(rand(1..10)),
+    authors: Person.all.sample(rand(1..10)),
+    iconographies: Iconography.all.sample(rand(1..5)).select(&:valid?)
+  )
+end
 # rubocop:enable Rails/Output
