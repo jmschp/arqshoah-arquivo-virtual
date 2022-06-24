@@ -334,7 +334,6 @@ teaching_material_types.each { |type| TeachingMaterialType.create!(name: type) }
     start_date: start_date,
     end_date: end_date,
     online: online,
-    recording_link: online ? "https://www.youtube.com/watch?v=4yaLkCsWky4" : nil,
     venue: online ? nil : Organization.all.sample,
     education_category: EducationCategory.all.sample,
     description: Faker::Lorem.paragraphs(number: 10).join(" "),
@@ -348,6 +347,7 @@ teaching_material_types.each { |type| TeachingMaterialType.create!(name: type) }
     publication_year: rand(1997..2021),
     pages: rand(1..5),
     recording_hours: rand(1..5),
+    recording_link: online ? "https://www.youtube.com/watch?v=4yaLkCsWky4" : nil,
     teaching_material_type: TeachingMaterialType.all.sample,
     publishing_company: Organization.all.sample,
     authors: Person.all.sample(rand(1..5))

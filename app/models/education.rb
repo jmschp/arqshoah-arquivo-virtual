@@ -5,12 +5,12 @@ class Education < ApplicationRecord
   include Registration
 
   belongs_to :education_category, inverse_of: :educations
-  belongs_to :venue, class_name: "Organization", inverse_of: :education_events
+  belongs_to :venue, class_name: "Organization", inverse_of: :education_events, optional: true
 
   has_many :education_organizers, inverse_of: :education, dependent: :destroy
   has_many :organizers, through: :education_organizers
   has_many :education_promoter_institutions, inverse_of: :education, dependent: :destroy
-  has_many :promoter_institution, through: :education_promoter_institutions
+  has_many :promoter_institutions, through: :education_promoter_institutions
   has_many :education_supporters, inverse_of: :education, dependent: :destroy
   has_many :organization_supporters, through: :education_supporters, source: :donor, source_type: "Organization"
   has_many :person_supporters, through: :education_supporters, source: :donor, source_type: "Person"
@@ -26,10 +26,9 @@ class Education < ApplicationRecord
   validates :education_organizers, presence: true
   validates :education_promoter_institutions, presence: true
   validates :education_supporters, presence: true
-  validates :end_date, presence: true, comparison: { less_than_or_equal_to: :start_date }
+  validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
   validates :online, inclusion: [true, false]
-  validates :recording_link, format: { with: %r{(https|http)://(\w+\.\w+\.\w+/|\w+\.\w+/)\S+}i }, allow_blank: true
-  validates :start_date, presence: true, comparison: { greater_than: :end_date }
+  validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
   validates :target_public, presence: true
   validates :title, presence: true, length: { maximum: 255 }
   validates :venue, presence: true, unless: -> { self.online? }

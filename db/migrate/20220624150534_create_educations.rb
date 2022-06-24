@@ -7,9 +7,8 @@ class CreateEducations < ActiveRecord::Migration[7.0]
       t.date :start_date
       t.date :end_date
       t.boolean :online, null: false, default: false
-      t.string :record_link
       t.references :education_category, null: false, foreign_key: true
-      t.references :venue, null: false, foreign_key: { to_table: :organizations }
+      t.references :venue, foreign_key: { to_table: :organizations }
       t.tsvector :document_ts_vector
 
       t.timestamps

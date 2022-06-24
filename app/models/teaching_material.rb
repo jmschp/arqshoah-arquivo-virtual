@@ -2,7 +2,7 @@
 
 class TeachingMaterial < ApplicationRecord
   belongs_to :education, inverse_of: :teaching_material
-  belongs_to :teaching_material_type, inverse_of: :education
+  belongs_to :teaching_material_type, inverse_of: :teaching_materials
   belongs_to :publishing_company, class_name: "Organization", inverse_of: :published_teaching_materials
 
   has_many :teaching_material_authors, inverse_of: :teaching_material, dependent: :destroy
@@ -12,6 +12,7 @@ class TeachingMaterial < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :publication_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }
+  validates :recording_link, format: { with: %r{(https|http)://(\w+\.\w+\.\w+/|\w+\.\w+/)\S+}i }, allow_blank: true
   validates :teaching_material_authors, presence: true
 
   def create_plain_text

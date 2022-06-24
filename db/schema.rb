@@ -270,9 +270,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_182842) do
     t.date "start_date"
     t.date "end_date"
     t.boolean "online", default: false, null: false
-    t.string "record_link"
     t.bigint "education_category_id", null: false
-    t.bigint "venue_id", null: false
+    t.bigint "venue_id"
     t.tsvector "document_ts_vector"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -474,6 +473,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_182842) do
     t.integer "publication_year", null: false
     t.integer "pages"
     t.integer "recording_hours"
+    t.string "recording_link"
     t.bigint "education_id", null: false
     t.bigint "teaching_material_type_id", null: false
     t.bigint "publishing_company_id", null: false
