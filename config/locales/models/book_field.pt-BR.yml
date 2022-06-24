@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      book_field:
+        one: Áreas de Livro
+        other: Áreas de Livro
+    attributes:
+      book_field:
+        name: Nome

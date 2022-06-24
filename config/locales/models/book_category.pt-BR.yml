@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      book_category:
+        one: Categoria de Livro
+        other: Categorias de Livro
+    attributes:
+      book_category:
+        name: Nome

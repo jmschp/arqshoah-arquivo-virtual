@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    models:
+      book:
+        one: Livro
+        other: Livros
+    attributes:
+      book:
+        authors: Autor(es)
+        book_category: Categoria
+        book_field: Área
+        edition: Edição
+        description: Descrição
+        iconographies: Iconografia
+        image: Imagem
+        isbn: ISBN
+        language: Idioma
+        location: Localização
+        observation: Observação
+        page_number: Páginas
+        pdf: Anexo PDF
+        publishing_company: Editora
+        publishing_year: Ano de publicação
+        title: Título
+        registration: Registro
+        subtitle: Subtítulo
