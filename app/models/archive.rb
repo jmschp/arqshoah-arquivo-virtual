@@ -25,12 +25,12 @@ class Archive < ApplicationRecord
   has_rich_text :description
   has_rich_text :observation
 
-  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Layout/LineLength
   validates :date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true
   validates :date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { self.date_day.present? }
   validates :date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { self.date_month.present? || self.date_day.present? }
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Layout/LineLength
 
   private
 

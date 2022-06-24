@@ -3,7 +3,7 @@
 class Organization < ApplicationRecord
   include LocationGeocode
 
-  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Layout/LineLength
   has_many :donated_archives, as: :donor, class_name: "Archive", inverse_of: :donor, dependent: :restrict_with_error
   has_many :donated_iconographies, as: :donor, class_name: "Iconography", inverse_of: :donor, dependent: :restrict_with_error
   has_many :issued_archives, class_name: "Archive", inverse_of: :issuing_agency, dependent: :restrict_with_error
@@ -16,7 +16,7 @@ class Organization < ApplicationRecord
   has_many :education_supporters, as: :donor, inverse_of: :donor, dependent: :destroy
   has_many :supported_education, through: :education_supporters, source: :education
   has_many :published_teaching_materials, class_name: "TeachingMaterial", foreign_key: :publishing_company_id, inverse_of: :publishing_company, dependent: :restrict_with_error
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Layout/LineLength
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 end

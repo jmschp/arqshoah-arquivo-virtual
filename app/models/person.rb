@@ -5,7 +5,7 @@ class Person < ApplicationRecord
   include FullTextSearch
   include Registration
 
-  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Layout/LineLength
   belongs_to :father, class_name: "Person", optional: true
   belongs_to :mother, class_name: "Person", optional: true
   belongs_to :spouse, class_name: "Person", optional: true
@@ -55,7 +55,7 @@ class Person < ApplicationRecord
   validates :gender, presence: true, unless: -> { self.commoner? }
 
   ransack_alias :name, :first_name_or_last_name_or_name_variation
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Layout/LineLength
 
   def self.select_options_name
     self.order(:last_name).pluck(:first_name, :last_name, :id).map do |person|

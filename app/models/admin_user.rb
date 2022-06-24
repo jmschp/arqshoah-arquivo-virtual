@@ -4,7 +4,7 @@ class AdminUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # registerable, :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Layout/LineLength
   devise :database_authenticatable, :confirmable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable, :trackable, :validatable
 
   validates :email, confirmation: true, length: { maximum: 255 }
@@ -12,5 +12,5 @@ class AdminUser < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
   validates :password, confirmation: true
   validates :password_confirmation, presence: true, if: :encrypted_password_changed?
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Layout/LineLength
 end
