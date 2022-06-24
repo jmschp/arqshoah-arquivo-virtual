@@ -26,6 +26,8 @@ class Book < ApplicationRecord
   validates :edition, presence: true
   validates :publishing_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }
 
+  has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
+
   private
 
   def create_plain_text
