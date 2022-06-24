@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Newspaper do
+  includes :agency, :newspaper_type
+
   permit_params(
     :agency_id, :author_id, :date_day, :date_month, :date_year, :description, :image, :language_id, :location,
     :pdf, :observation, :print_number, :newspaper_type_id, :title, { people_cited_ids: [] }

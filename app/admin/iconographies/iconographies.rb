@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Iconography do
+  includes :iconography_technic, :iconography_type, :iconography_support
+
   permit_params(
     :author_id, :date_day, :date_month, :date_year, :description, :donor_id, :donor_type, :iconography_technic_id,
     :iconography_support_id, :iconography_type_id, :image, :location, :observation, :original, :subtitle, :title,
