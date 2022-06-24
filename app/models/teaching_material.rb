@@ -13,4 +13,13 @@ class TeachingMaterial < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :publication_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }
   validates :teaching_material_authors, presence: true
+
+  def create_plain_text
+    <<~RECORD
+      #{self.title}
+      #{self.teaching_material_type.name}
+      #{self.publishing_company.name}
+      #{self.authors.pluck(:first_name, :last_name).map { |name| name.join(' ') }&.join('; ')}
+    RECORD
+  end
 end

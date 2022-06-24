@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Education < ApplicationRecord
+  include FullTextSearch
+  include Registration
+
   belongs_to :education_category, inverse_of: :educations
   belongs_to :venue, class_name: "Organization", inverse_of: :education_events
 
@@ -19,4 +22,33 @@ class Education < ApplicationRecord
 
   has_one_attached :flyer
   has_many_attached :images
+
+  validates :education_organizers, presence: true
+  validates :education_promoter_institutions, presence: true
+  validates :education_supporters, presence: true
+  validates :end_date, presence: true, comparison: { less_than_or_equal_to: :start_date }
+  validates :online, inclusion: [true, false]
+  validates :recording_link, format: { with: %r{(https|http)://(\w+\.\w+\.\w+/|\w+\.\w+/)\S+}i }, allow_blank: true
+  validates :start_date, presence: true, comparison: { greater_than: :end_date }
+  validates :target_public, presence: true
+  validates :title, presence: true, length: { maximum: 255 }
+  validates :venue, presence: true, unless: -> { self.online? }
+
+  private
+
+  def create_plain_text
+    <<~RECORD
+      #{self.title}
+      #{self.target_public}
+      #{self.venue&.name}
+      #{self.education_category.name}
+      #{self.organizers.pluck(:first_name, :last_name).map { |name| name.join(' ') }.join('; ')}
+      #{self.promoter_institutions.pluck(:name).join('; ')}
+      #{self.organization_supporters.pluck(:name).join('; ')}
+      #{self.person_supporters.pluck(:first_name, :last_name).map { |name| name.join(' ') }.join('; ')}
+      #{self.description.to_plain_text}
+      #{self.observation.to_plain_text}
+      #{self.teaching_material.create_plain_text if self.teaching_material.present?}
+    RECORD
+  end
 end
