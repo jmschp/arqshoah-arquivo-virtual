@@ -301,4 +301,56 @@ book_categories.each { |book_category| BookCategory.create!(name: book_category)
     iconographies: Iconography.all.sample(rand(1..5)).select(&:valid?)
   )
 end
+
+#=======================================# Education #=======================================#
+puts "Creating educations"
+
+education_categories = [
+  "Conferência", "Congresso", "Colóquio", "Ciclo de Cinema", "Ciclo de Estudos",
+  "Ciclo de Palestras", "Ciclo de Seminários", "Concurso de Arquitetura", "Concurso de Dança",
+  "Concurso de Fotografia", "Concurso de Música", "Concurso de Redação", "Curso", "Debate",
+  "Documentário", "Encontro", "Exposição", "Feira de Livros", "Feira de Artes",
+  "Feira de Cultura popular", "Grupo de Estudos", "Jornada Interdisciplinar", "Oficina de Artes",
+  "Oficina de Ciências", "Oficina de Literatura", "Oficina de Artes Cênicas", "Oficina de Música",
+  "Oficina Pedagógica", "Seminário", "Teatro", "Testemunho"
+]
+
+education_categories.each { |edu_cat| EducationCategory.create!(name: edu_cat) }
+
+teaching_material_types = %w[
+  Apostila Catálogo Coletânea Entrevista Livro Podcast Vídeo
+]
+
+teaching_material_types.each { |type| TeachingMaterialType.create!(name: type) }
+
+5.times do
+  start_date = Faker::Date.between(from: "2014-09-23", to: "2020-09-25")
+  end_date = start_date + rand(5...10)
+  online = [true, false].sample
+
+  Education.new(
+    title: Faker::Lorem.unique.words(number: rand(4..8)).join(" "),
+    target_public: Faker::Lorem.unique.words(number: 4).join(" "),
+    start_date: start_date,
+    end_date: end_date,
+    online: online,
+    recording_link: online ? "https://www.youtube.com/watch?v=4yaLkCsWky4" : nil,
+    venue: online ? nil : Organization.all.sample,
+    education_category: EducationCategory.all.sample,
+    description: Faker::Lorem.paragraphs(number: 10).join(" "),
+    observation: Faker::Lorem.paragraphs(number: 10).join(" "),
+    organization_supporters: Organization.all.sample(rand(1..5)),
+    person_supporters: Person.all.sample(rand(1..5)),
+    organizers: Person.all.sample(rand(1..5)),
+    promoter_institutions: Organization.all.sample(rand(1..5))
+  ).build_teaching_material(
+    title: Faker::Lorem.unique.words(number: rand(4..8)).join(" "),
+    publication_year: rand(1997..2021),
+    pages: rand(1..5),
+    recording_hours: rand(1..5),
+    teaching_material_type: TeachingMaterialType.all.sample,
+    publishing_company: Organization.all.sample,
+    authors: Person.all.sample(rand(1..5))
+  ).save!
+end
 # rubocop:enable Rails/Output
