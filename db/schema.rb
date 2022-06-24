@@ -414,6 +414,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_191447) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "archives", "archive_classifications"
+  add_foreign_key "archives", "archive_types"
   add_foreign_key "book_authors", "books"
   add_foreign_key "book_authors", "people", column: "author_id"
   add_foreign_key "book_iconographies", "books"

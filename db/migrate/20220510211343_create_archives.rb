@@ -23,8 +23,8 @@ class CreateArchives < ActiveRecord::Migration[7.0]
       t.string :to_name
       t.string :to_role
 
-      t.references :archive_classification, foreign: true, null: false
-      t.references :archive_type, foreign: true, null: false
+      t.references :archive_classification, null: false, foreign_key: true
+      t.references :archive_type, null: false, foreign_key: true
       t.references :donor, polymorphic: true
       t.references :language, foreign: true
       t.references :issuing_agency, foreign: { to_table: :organizations }
