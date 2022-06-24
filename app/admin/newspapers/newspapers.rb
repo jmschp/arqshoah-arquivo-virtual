@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Newspaper do
+  menu label: I18n.t(:collection, scope: [Newspaper.i18n_scope, :models, Newspaper.model_name.i18n_key])
+
   includes :agency, :newspaper_type
 
   permit_params(

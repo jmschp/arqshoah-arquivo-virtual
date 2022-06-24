@@ -3,7 +3,8 @@ pt-BR:
     models:
       newspaper:
         one: Periódico
-        other: Hemeroteca
+        other: Periódicos
+        collection: Hemeroteca
     attributes:
       newspaper:
         author: Autor / Jornalista
