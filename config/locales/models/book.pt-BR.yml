@@ -4,6 +4,7 @@ pt-BR:
       book:
         one: Livro
         other: Livros
+        collection: Biblioteca
     attributes:
       book:
         authors: Autor(es)
