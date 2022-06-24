@@ -1,0 +1,68 @@
+# frozen_string_literal: true
+
+render "admin/shared/trix_import"
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+  h2 registration(resource)
+
+  columns do
+    column do
+      f.inputs Book.human_attribute_name(:general_information) do
+        f.input :title
+        f.input :subtitle
+        f.input :publishing_company, input_html: { class: "tom-select-init" }
+        f.input :edition
+        f.input :publishing_year
+        f.input :isbn
+        f.input :pages
+        f.input :book_category, input_html: { class: "tom-select-init" }
+        f.input :book_field, input_html: { class: "tom-select-init" }
+        f.input :location, as: :select, collection: [book.location], input_html: { class: "tom-select-init tom-select-location" }
+        f.input :language, input_html: { class: "tom-select-init" }
+        f.input :authors, input_html: { class: "tom-select-init" }
+      end
+    end
+    column do
+      f.inputs Book.human_attribute_name(:upload_documents) do
+        f.input :pdf, as: :file, input_html: { accept: "application/pdf" }
+        f.input :image, as: :file, input_html: { accept: "image/*" }
+      end
+
+      f.inputs Book.human_attribute_name(:iconographies) do
+        f.input :iconographies, input_html: { class: "tom-select-init" }
+      end
+    end
+  end
+
+  f.inputs Book.human_attribute_name(:people_cited) do
+    columns do
+      column do
+        f.inputs Survivor.model_name.human do
+          f.input :people_cited, collection: Survivor.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "book_survivor_ids" }
+        end
+      end
+      column do
+        f.inputs Savior.model_name.human do
+          f.input :people_cited, collection: Savior.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "book_savior_ids" }
+        end
+      end
+      column do
+        f.inputs Commoner.model_name.human do
+          f.input :people_cited, collection: Commoner.all, label: false, input_html: { class: "tom-select-init", style: "width: 100%;", id: "book_commoner_ids" }
+        end
+      end
+    end
+  end
+
+  f.inputs "Informações complementares" do
+    f.label :description
+    f.rich_text_area :description
+    br
+    f.label :observation
+    f.rich_text_area :observation
+    br
+  end
+
+  f.actions
+end

@@ -100,4 +100,6 @@ ActiveAdmin.register Book do
 
     active_admin_comments
   end
+
+  form partial: "form"
 end

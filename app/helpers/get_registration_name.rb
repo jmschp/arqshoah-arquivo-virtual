@@ -5,8 +5,8 @@ module GetRegistrationName
     case record
     when Archive
       "RG-ARQ"
-    #  when Book
-    #  "RG-PUB"
+    when Book
+      "RG-BBG"
     #  when Education
     # "RG-EDU"
     when Iconography
