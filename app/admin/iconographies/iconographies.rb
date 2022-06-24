@@ -32,7 +32,7 @@ ActiveAdmin.register Iconography do
     actions dropdown: true
   end
 
-  filter :general_search, as: :string, label: "Busca geral"
+  filter :general_search, as: :string
   filter :title_cont, label: Iconography.human_attribute_name(:title)
   filter :iconography_technic, input_html: { class: "tom-select-init" }
   filter :iconography_type, input_html: { class: "tom-select-init" }

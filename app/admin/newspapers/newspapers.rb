@@ -30,7 +30,7 @@ ActiveAdmin.register Newspaper do
     actions dropdown: true
   end
 
-  filter :general_search, as: :string, label: "Busca geral"
+  filter :general_search, as: :string
   filter :title_cont, label: Newspaper.human_attribute_name(:title)
   filter :press_type, input_html: { class: "tom-select-init" }
   filter :agency, input_html: { class: "tom-select-init" }

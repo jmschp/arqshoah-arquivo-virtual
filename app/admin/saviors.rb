@@ -28,7 +28,7 @@ ActiveAdmin.register Savior do
     actions dropdown: true
   end
 
-  filter :general_search, as: :string, label: "Busca geral"
+  filter :general_search, as: :string
   filter :name_cont, label: Savior.human_attribute_name(:name)
   filter :birth_place_country_eq, collection: proc { Savior.all.pluck(:birth_place_country) },
                                   label: Savior.human_attribute_name(:birth_place_country),

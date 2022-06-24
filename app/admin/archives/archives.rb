@@ -34,7 +34,7 @@ ActiveAdmin.register Archive do
     actions dropdown: true
   end
 
-  filter :general_search, as: :string, label: "Busca geral"
+  filter :general_search, as: :string
   filter :title_cont, label: Archive.human_attribute_name(:title)
   filter :archive_classification, input_html: { class: "tom-select-init" }
   filter :archive_type, input_html: { class: "tom-select-init" }

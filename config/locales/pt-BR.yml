@@ -17,6 +17,7 @@ pt-BR:
     versions: Versões
     upload_documents: Carregar documentos
     updated_at: Atualizado em
+    general_search: Busca geral
   date:
     abbr_day_names:
       - dom
