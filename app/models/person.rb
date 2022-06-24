@@ -26,6 +26,8 @@ class Person < ApplicationRecord
   has_many :organized_educations, through: :education_organizers, source: :education
   has_many :education_supporters, as: :donor, inverse_of: :donor, dependent: :destroy
   has_many :supported_education, through: :education_supporters, source: :education
+  has_many :teaching_material_authors, inverse_of: :author, dependent: :restrict_with_error
+  has_many :authored_teaching_materials, through: :teaching_material_authors, source: :teaching_material
 
   has_one_attached :pdf
   has_many_attached :images

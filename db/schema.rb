@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_24_151806) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_24_182842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -453,6 +453,37 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_151806) do
     t.index ["name"], name: "index_religions_on_name", unique: true
   end
 
+  create_table "teaching_material_authors", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "teaching_material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_teaching_material_authors_on_author_id"
+    t.index ["teaching_material_id"], name: "index_teaching_material_authors_on_teaching_material_id"
+  end
+
+  create_table "teaching_material_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_teaching_material_types_on_name", unique: true
+  end
+
+  create_table "teaching_materials", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "publication_year", null: false
+    t.integer "pages"
+    t.integer "recording_hours"
+    t.bigint "education_id", null: false
+    t.bigint "teaching_material_type_id", null: false
+    t.bigint "publishing_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["education_id"], name: "index_teaching_materials_on_education_id"
+    t.index ["publishing_company_id"], name: "index_teaching_materials_on_publishing_company_id"
+    t.index ["teaching_material_type_id"], name: "index_teaching_materials_on_teaching_material_type_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.bigint "item_id", null: false
@@ -498,4 +529,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_151806) do
   add_foreign_key "people", "people", column: "mother_id"
   add_foreign_key "people", "people", column: "spouse_id"
   add_foreign_key "people", "religions"
+  add_foreign_key "teaching_material_authors", "people", column: "author_id"
+  add_foreign_key "teaching_material_authors", "teaching_materials"
+  add_foreign_key "teaching_materials", "educations"
+  add_foreign_key "teaching_materials", "organizations", column: "publishing_company_id"
+  add_foreign_key "teaching_materials", "teaching_material_types"
 end

@@ -12,6 +12,8 @@ class Education < ApplicationRecord
   has_many :organization_supporters, through: :education_supporters, source: :donor, source_type: "Organization"
   has_many :person_supporters, through: :education_supporters, source: :donor, source_type: "Person"
 
+  has_one :teaching_material, inverse_of: :education, dependent: :destroy
+
   has_rich_text :description
   has_rich_text :observation
 
