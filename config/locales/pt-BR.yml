@@ -10,14 +10,16 @@ pt-BR:
     additional_information: Informações complementares
     created_at: Criado em
     general_information: Informações gerais
+    general_search: Busca geral
+    pdf: Anexo PDF
+    no_pdf: Sem anexo PDF
+    people_cited: Pessoas citadas
+    updated_at: Atualizado em
+    upload_documents: Carregar documentos
+    versions: Versões
     city: Cidade
     state: Estado
     country: País
-    people_cited: Pessoas citadas
-    versions: Versões
-    upload_documents: Carregar documentos
-    updated_at: Atualizado em
-    general_search: Busca geral
   date:
     abbr_day_names:
       - dom

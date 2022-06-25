@@ -7,18 +7,18 @@ pt-BR:
     attributes:
       education:
         description: Descrição
-        education_category: Categoria
         end_date: Data de fim
+        education_category: Categoria
         education_supporters: Apoios de educação
         observation: Observação
-        organizers: Organizadores(as)
         organization_supporters: Apoios de organizações
+        organizers: Organizadores(as)
         person_supporters: Apoios de pessoas
+        pdf: Flyer
         promoter_institutions: Instituições promotoras
-        venue: Local de realização
         recording_link: Link da gravação
         registration: Registro
         start_date: Data de início
-        teaching_material: Material pedagógico
-        title: Título
         target_public: Público alvo
+        title: Título
+        venue: Local de realização

@@ -20,7 +20,7 @@ class Education < ApplicationRecord
   has_rich_text :description
   has_rich_text :observation
 
-  has_one_attached :flyer
+  has_one_attached :pdf
   has_many_attached :images
 
   validates :education_organizers, presence: true
@@ -32,6 +32,8 @@ class Education < ApplicationRecord
   validates :target_public, presence: true
   validates :title, presence: true, length: { maximum: 255 }
   validates :venue, presence: true, unless: -> { self.online? }
+
+  has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
 
   private
 
