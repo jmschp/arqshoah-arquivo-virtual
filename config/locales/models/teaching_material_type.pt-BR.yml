@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      teaching_material_type:
+        one: Tipo de material pedagógico
+        other: Tipos de materiais pedagógicos
+    attributes:
+      teaching_material_type:
+        name: Nome

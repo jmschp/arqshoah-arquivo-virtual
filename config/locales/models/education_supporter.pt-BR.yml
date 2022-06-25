@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      education_supporter:
+        one: Apoio de Educação
+        other: Apoios de Educação
+    attributes:
+      education_supporter:
+        education: Educação
+        donor: Apoio

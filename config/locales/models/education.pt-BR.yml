@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      education:
+        one: Educação
+        other: Educações
+    attributes:
+      education:
+        description: Descrição
+        education_category: Categoria
+        end_date: Data de fim
+        education_supporters: Apoios de educação
+        observation: Observação
+        organizers: Organizadores(as)
+        organization_supporters: Apoios de organizações
+        person_supporters: Apoios de pessoas
+        promoter_institutions: Instituições promotoras
+        venue: Local de realização
+        recording_link: Link da gravação
+        registration: Registro
+        start_date: Data de início
+        teaching_material: Material pedagógico
+        title: Título
+        target_public: Público alvo

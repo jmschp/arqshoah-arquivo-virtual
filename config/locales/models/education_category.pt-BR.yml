@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      education_category:
+        one: Categoria de Educação
+        other: Categorias de Educação
+    attributes:
+      education_category:
+        name: Nome
