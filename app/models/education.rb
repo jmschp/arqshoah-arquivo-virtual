@@ -33,6 +33,8 @@ class Education < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :venue, presence: true, unless: -> { self.online? }
 
+  accepts_nested_attributes_for :teaching_material, reject_if: :all_blank, allow_destroy: true
+
   has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
 
   private

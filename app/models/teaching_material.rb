@@ -10,10 +10,12 @@ class TeachingMaterial < ApplicationRecord
 
   has_one_attached :pdf
 
+  # rubocop:disable Layout/LineLength
   validates :title, presence: true, length: { maximum: 255 }
   validates :publication_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }
-  validates :recording_link, format: { with: %r{(https|http)://(\w+\.\w+\.\w+/|\w+\.\w+/)\S+}i }, allow_blank: true
+  validates :recording_link, format: { with: %r{(https|http)://(\w+\.\w+\.\w+/|\w+\.\w+/)\S+}i, message: :url_invalid }, allow_blank: true
   validates :teaching_material_authors, presence: true
+  # rubocop:enable Layout/LineLength
 
   def create_plain_text
     <<~RECORD

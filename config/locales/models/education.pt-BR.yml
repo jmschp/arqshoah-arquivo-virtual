@@ -6,6 +6,7 @@ pt-BR:
         other: Educações
     attributes:
       education:
+        dates: Datas
         description: Descrição
         end_date: Data de fim
         education_category: Categoria

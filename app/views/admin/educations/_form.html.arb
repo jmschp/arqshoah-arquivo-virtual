@@ -1,0 +1,96 @@
+# frozen_string_literal: true
+
+render "admin/shared/trix_import"
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+  h2 registration(resource)
+
+  columns do
+    column do
+      f.inputs Archive.human_attribute_name(:general_information) do
+        f.input :title
+        f.input :target_public
+        f.input :online, as: :radio
+        f.input :education_category, input_html: { class: "tom-select-init" }
+        f.input :venue, input_html: { class: "tom-select-init" }
+      end
+    end
+    column do
+      f.inputs Education.human_attribute_name(:dates) do
+        columns do
+          column do
+            f.label :start_date
+            f.input :start_date, label: false, as: :date_picker
+          end
+          column do
+            f.label :end_date
+            f.input :end_date, label: false, as: :date_picker
+          end
+        end
+      end
+
+      f.inputs Education.human_attribute_name(:upload_documents) do
+        f.input :flyer, as: :file, input_html: { accept: "application/pdf" }
+        f.input :images, as: :file, input_html: { accept: "image/*", multiple: true }
+      end
+    end
+  end
+
+  panel "#{Education.human_attribute_name(:promoter_institutions)} & #{Education.human_attribute_name(:organizers)}" do
+    columns do
+      column do
+        f.inputs do
+          f.input :promoter_institutions, input_html: { class: "tom-select-init" }
+        end
+      end
+      column do
+        f.inputs do
+          f.input :organizers, input_html: { class: "tom-select-init" }
+        end
+      end
+    end
+  end
+
+  panel Education.human_attribute_name(:education_supporters) do
+    columns do
+      column do
+        f.inputs do
+          f.input :organization_supporters, input_html: { class: "tom-select-init" }
+        end
+      end
+      column do
+        f.inputs do
+          f.input :person_supporters, input_html: { class: "tom-select-init" }
+        end
+      end
+    end
+  end
+
+  education.build_teaching_material if education.teaching_material.blank?
+
+  panel TeachingMaterial.model_name.human do
+    f.has_many :teaching_material, new_record: false, allow_destroy: true, heading: false do |tm|
+      tm.input :title
+      tm.input :publication_year
+      tm.input :pages
+      tm.input :recording_link, placeholder: "http://www.exemplo.com/"
+      tm.input :recording_hours
+      tm.input :teaching_material_type, input_html: { class: "tom-select-init" }
+      tm.input :publishing_company, input_html: { class: "tom-select-init" }
+      tm.input :authors, input_html: { class: "tom-select-init" }
+      tm.input :pdf, as: :file, input_html: { accept: "application/pdf" }
+    end
+  end
+
+  f.inputs Education.human_attribute_name(:additional_information) do
+    f.label :description
+    f.rich_text_area :description
+    br
+    f.label :observation
+    f.rich_text_area :observation
+    br
+  end
+
+  f.actions
+end
