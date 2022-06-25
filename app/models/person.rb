@@ -46,10 +46,10 @@ class Person < ApplicationRecord
 
   validates :birth_date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true, unless: -> { self.commoner? }
   validates :birth_date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { !self.commoner? && self.birth_date_day.present? }
-  validates :birth_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { !self.commoner? && self.birth_date_month.present? || self.birth_date_day.present? }
+  validates :birth_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { (!self.commoner? && self.birth_date_month.present?) || self.birth_date_day.present? }
   validates :death_date_day, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, allow_nil: true, unless: -> { self.commoner? }
   validates :death_date_month, presence: true, numericality: { only_integer: true }, length: { minimum: 1, maximum: 2 }, if: -> { !self.commoner? && self.death_date_day.present? }
-  validates :death_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { !self.commoner? && self.death_date_month.present? || self.death_date_day.present? }
+  validates :death_date_year, presence: true, numericality: { only_integer: true }, length: { is: 4 }, if: -> { (!self.commoner? && self.death_date_month.present?) || self.death_date_day.present? }
   validates :first_name, presence: true, length: { maximum: 255 }
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :gender, presence: true, unless: -> { self.commoner? }
