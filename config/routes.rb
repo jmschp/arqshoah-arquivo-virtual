@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root "pages#home"
+
+  resources :archives, only: %i[index show]
 end
