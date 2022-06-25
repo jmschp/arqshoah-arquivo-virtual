@@ -26,7 +26,7 @@ module DateDisplay
   ].freeze
 
   included do
-    before_save :set_date_and_mask_date
+    before_validation :set_date_and_mask_date
 
     def date_display(date_field_sym)
       case self.try("#{date_field_sym}_mask")

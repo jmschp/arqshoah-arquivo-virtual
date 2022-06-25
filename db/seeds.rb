@@ -4,17 +4,30 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 def date_generator(type = nil)
-  date = Faker::Date.between(from: 80.years.ago, to: Date.current)
+  start_date = Faker::Date.between(from: 100.years.ago, to: 20.years.ago)
+  end_date = start_date + rand((30.years)..(50.years))
   type ||= %i[full_date year_month year no_date].sample
   case type
   when :full_date
-    { year: date.year, month: date.month, day: date.day }
+    [
+      { year: start_date.year, month: start_date.month, day: start_date.day },
+      { year: end_date.year, month: end_date.month, day: end_date.day }
+    ]
   when :year_month
-    { year: date.year, month: date.month, day: nil }
+    [
+      { year: start_date.year, month: start_date.month, day: nil },
+      { year: end_date.year, month: end_date.month, day: nil }
+    ]
   when :year
-    { year: date.year, month: nil, day: nil }
+    [
+      { year: start_date.year, month: nil, day: nil },
+      { year: end_date.year, month: nil, day: nil }
+    ]
   when :no_date
-    { year: nil, month: nil, day: nil }
+    [
+      { year: nil, month: nil, day: nil },
+      { year: nil, month: nil, day: nil }
+    ]
   end
 end
 
@@ -63,8 +76,7 @@ religions.each { |religion| Religion.create!(name: religion) }
 puts "Creating survivors"
 
 5.times do
-  birth_date = date_generator
-  death_date = date_generator
+  birth_date, death_date = date_generator
 
   survivor = Survivor.new(
     first_name: Faker::Name.first_name,
@@ -100,8 +112,7 @@ end
 puts "Creating saviors"
 
 5.times do
-  birth_date = date_generator
-  death_date = date_generator
+  birth_date, death_date = date_generator
 
   savior = Savior.new(
     first_name: Faker::Name.first_name,
@@ -153,7 +164,7 @@ archive_type = [
 archive_type.each { |name| ArchiveType.create!(name: name) }
 
 5.times do
-  date = date_generator
+  date = date_generator[0]
   Archive.create!(
     issuing_agency: Organization.all.sample,
     receiver_agency: Organization.all.sample,
@@ -211,7 +222,7 @@ images_path = Dir.glob(Rails.root.join("db/images_seed/{*.jpg,*.png}"))
 puts "Creating iconographies without image, setting validate to false" unless images_path.length.positive?
 
 (images_path.length.positive? ? images_path.length : 10).times do |i|
-  date = date_generator
+  date = date_generator[0]
 
   ico = Iconography.new(
     title: Faker::GreekPhilosophers.unique.quote,
@@ -243,13 +254,13 @@ puts "Creating iconographies without image, setting validate to false" unless im
 end
 
 #=======================================# Press #=======================================#
-puts "Creating presses"
+puts "Creating newspapers"
 
 newspaper_type = %w[Artigo Cronica Entrevista Noticia Resenha Informe Carta]
 newspaper_type.each { |type| NewspaperType.create!(name: type) }
 
 5.times do
-  date = date_generator
+  date = date_generator[0]
 
   Newspaper.create!(
     title: Faker::Lorem.unique.words(number: rand(4..8)).join(" "),
