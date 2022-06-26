@@ -75,7 +75,7 @@ religions.each { |religion| Religion.create!(name: religion) }
 #=======================================# Survivor #=======================================#
 puts "Creating survivors"
 
-5.times do
+150.times do
   birth_date, death_date = date_generator
 
   survivor = Survivor.new(
@@ -111,7 +111,7 @@ end
 #=======================================# Savior #=======================================#
 puts "Creating saviors"
 
-5.times do
+150.times do
   birth_date, death_date = date_generator
 
   savior = Savior.new(
@@ -163,7 +163,7 @@ archive_type = [
 ]
 archive_type.each { |name| ArchiveType.create!(name: name) }
 
-5.times do
+150.times do
   date = date_generator[0]
   Archive.create!(
     issuing_agency: Organization.all.sample,
@@ -221,7 +221,7 @@ iconography_supports.each { |name| IconographySupport.create!(name: name) }
 images_path = Dir.glob(Rails.root.join("db/images_seed/{*.jpg,*.png}"))
 puts "Creating iconographies without image, setting validate to false" unless images_path.length.positive?
 
-(images_path.length.positive? ? images_path.length : 10).times do |i|
+(images_path.length.positive? ? images_path.length : 50).times do |i|
   date = date_generator[0]
 
   ico = Iconography.new(
@@ -259,7 +259,7 @@ puts "Creating newspapers"
 newspaper_type = %w[Artigo Cronica Entrevista Noticia Resenha Informe Carta]
 newspaper_type.each { |type| NewspaperType.create!(name: type) }
 
-5.times do
+150.times do
   date = date_generator[0]
 
   Newspaper.create!(
@@ -293,7 +293,7 @@ book_categories = [
 
 book_categories.each { |book_category| BookCategory.create!(name: book_category) }
 
-5.times do
+150.times do
   Book.create!(
     title: Faker::Book.unique.title,
     subtitle: Faker::Lorem.sentence(word_count: rand(1...15), supplemental: true),
@@ -334,7 +334,7 @@ teaching_material_types = %w[
 
 teaching_material_types.each { |type| TeachingMaterialType.create!(name: type) }
 
-5.times do
+150.times do
   start_date = Faker::Date.between(from: "2014-09-23", to: "2020-09-25")
   end_date = start_date + rand(5...10)
   online = [true, false].sample
