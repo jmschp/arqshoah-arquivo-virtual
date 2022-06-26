@@ -2,12 +2,12 @@
 import "@hotwired/turbo-rails";
 import "controllers";
 
-import "./tom-select.js"
+import "./tom-select.js";
 import "./popper";
 import "./bootstrap.min";
 
-import tomSelectInit from "./tom_select_init"
+import tomSelectInit from "./tom_select_init";
 
-window.addEventListener("load", () => {
+document.addEventListener("turbo:load", () => {
   tomSelectInit();
 });
