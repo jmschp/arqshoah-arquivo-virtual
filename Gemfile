@@ -57,6 +57,7 @@ gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise_invitable", "~> 2.0", ">= 2.0.6"
 gem "geocoder", "~> 1.8"
 gem "kaminari", "~> 1.2", ">= 1.2.2"
+gem "kaminari-i18n", "~> 0.5.0"
 gem "paper_trail", "~> 12.3"
 gem "ransack", "~> 3.2", ">= 3.2.1"
 
