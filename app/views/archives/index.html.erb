@@ -2,4 +2,7 @@
 
   <%= render "shared/index_page_header", title: Archive.model_name.human(count: 2), records: @archives %>
 
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-3">
+    <%= render partial: "shared/record_card", collection: @archives, as: :record, locals: { info_one: :archive_classification, info_two: :archive_type } %>
+  </div>
 </div>

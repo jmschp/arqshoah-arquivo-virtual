@@ -1,0 +1,45 @@
+<div class="col">
+  <div class="card h-100 border-primary shadow-lg" style="max-width: 500px;">
+
+    <%= link_to(record, class: "btn btn-primary btn-sm position-absolute top-0 end-0") do %>
+      <i class="fas fa-eye"></i>
+    <% end %>
+    <%= link_to url_for([:edit, :admin, record]), class: "btn btn-primary btn-sm position-absolute bottom-0 end-0" do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+
+    <div class="row g-0">
+      <div class="col-md-4"">
+        <% if record.respond_to?(:images) && record.images.attached? %>
+          <div id="index-page-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% record.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block"  %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% elsif record.respond_to?(:image) && record.image.attached? %>
+          <%= image_tag record.image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block"  %>
+        <% else %>
+          <%= image_tag "image-placeholder.png", class: "img-fluid rounded-start mx-auto d-block", style: "max-height: 200px" %>
+        <% end %>
+      </div>
+
+      <div class="col-md-8 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title text-truncate"><%= record.try(:title) || record.try(:name) %></h5>
+          <p class="card-text text-truncate"><%= record.registration %></p>
+          <p class="card-text text-truncate">
+            <%= record.try(info_one).try(:name) || record.try(info_one) %>
+            <br>
+            <%= record.try(info_two).try(:name) || record.try(info_two) %>
+          </p>
+        </div>
+
+        <div class="card-footer align-bottom"><small class="text-muted">Atualizado <%= time_ago_in_words(record.updated_at) %></small></div>
+      </div>
+    </div>
+  </div>
+</div>
