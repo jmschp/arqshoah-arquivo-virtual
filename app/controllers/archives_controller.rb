@@ -2,7 +2,8 @@
 
 class ArchivesController < ApplicationController
   def index
-    @archives = Archive.includes(:archive_classification, :archive_type).with_attached_images
+    @q = Archive.ransack(params[:q])
+    @archives = @q.result(distinct: true).includes(:archive_classification, :archive_type).with_attached_images
   end
 
   def show; end
