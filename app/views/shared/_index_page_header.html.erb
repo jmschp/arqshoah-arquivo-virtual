@@ -1,0 +1,19 @@
+<div class="row mb-3">
+  <div class="col-12 col-md-10">
+    <h1 class="text-center"><%= title %></h1>
+  </div>
+  <div class="col-12 col-md-2">
+    <div class="float-end">
+      <%= button_tag(class: "btn btn-primary ", type: "button", data: { "bs-toggle": "offcanvas", "bs-target": "#offcanvas-search-form" }, aria: { controls: "offcanvas-search-form" }) do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+      <% if admin_user_signed_in? %>
+        <%= link_to({ controller: [:admin, records.model_name.route_key].join("/"), action: :new } , class: "btn btn-primary") do %>
+          <i class="fas fa-plus-square"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/search_form_offcanvas", q: @q %>

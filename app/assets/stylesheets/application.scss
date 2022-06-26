@@ -9,7 +9,7 @@
 @import "fontawesome/solid";
 @import "fontawesome/brands";
 
-//===== Costum files =====\\
+//===== Custom files =====\\
 @import "./components";
 
 body {
@@ -30,6 +30,7 @@ header {
 
 main {
   flex-grow: 1;
+  margin: 25px 0;
 }
 
 .text-justify {
