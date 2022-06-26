@@ -57,6 +57,7 @@ gem "devise", "~> 4.8", ">= 4.8.1"
 gem "devise_invitable", "~> 2.0", ">= 2.0.6"
 gem "geocoder", "~> 1.8"
 gem "paper_trail", "~> 12.3"
+gem "ransack", "~> 3.2", ">= 3.2.1"
 
 group :development, :test do
   gem "awesome_print"
