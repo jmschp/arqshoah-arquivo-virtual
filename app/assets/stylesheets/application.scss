@@ -1,10 +1,13 @@
 //===== Config files =====\\
-@import "./config_variables/colors";
-@import "./config_variables/bootstrap_variables";
+@import "config_variables";
 
 //===== Libraries =====\\
 @import "actiontext.css";
 @import "bootstrap";
+@import "fontawesome/fontawesome";
+@import "fontawesome/regular";
+@import "fontawesome/solid";
+@import "fontawesome/brands";
 
 //===== Costum files =====\\
 @import "./components";
