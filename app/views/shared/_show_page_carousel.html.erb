@@ -1,0 +1,27 @@
+<% if record.respond_to?(:images) && record.images.attached? %>
+  <div id="show-page-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% record.images.with_all_variant_records.each_with_index do |image, index| %>
+        <div class="carousel-item <%= 'active' if index == 0 %>">
+          <%= link_to(rails_blob_path(image, disposition: "inline"), target: :_blank, rel: :noopener) do %>
+            <%= image_tag(image.variant(resize_to_fit: [nil, 530]), class: "d-block img-fluid mx-auto") %>
+          <% end %>
+        </div>
+      <% end %>
+      <button class="carousel-control-prev" type="button" data-bs-target="#show-page-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#show-page-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Seguinte</span>
+      </button>
+    </div>
+  </div>
+<% elsif record.respond_to?(:image) && record.image.attached? %>
+  <%= link_to(rails_blob_path(record.image, disposition: "inline"), target: :_blank, rel: :noopener) do %>
+    <%= image_tag(record.image.variant(resize_to_fit: [nil, 530]), class: "d-block img-fluid mx-auto") %>
+  <% end %>
+<% else %>
+  <%= image_tag("arqshoah-logo.png", class: "d-block img-fluid mx-auto") %>
+<% end %>

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-11">
+    <h1 class="text-center"><%= record.try(:title) || record.try(:name) %></h1>
+    <% if record.try(:subtitle) %>
+      <h2 class="text-center"><%= record.try(:subtitle) %></h2>
+    <% end %>
+  </div>
+
+  <% if admin_user_signed_in? %>
+    <div class="col-1">
+      <%= link_to([:edit, :admin, record], class: "btn btn-primary float-end") do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

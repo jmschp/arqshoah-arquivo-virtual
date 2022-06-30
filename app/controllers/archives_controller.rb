@@ -7,5 +7,7 @@ class ArchivesController < ApplicationController
                   .with_attached_images.page(params[:page])
   end
 
-  def show; end
+  def show
+    @archive = Archive.with_attached_images.find(params[:id])
+  end
 end
