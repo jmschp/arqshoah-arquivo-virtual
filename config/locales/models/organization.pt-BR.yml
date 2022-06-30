@@ -4,6 +4,7 @@ pt-BR:
       organization:
         one: Organização
         other: Organizações
+        agency: Instituição
     attributes:
       organization:
         name: Nome

@@ -1,0 +1,10 @@
+<% if record.respond_to?(:pdf) && record.pdf.attached? %>
+  <tr>
+    <th scope="row"><%= record.class.human_attribute_name(:pdf) %></th>
+    <td>
+      <%= link_to(rails_blob_path(record.pdf, disposition: "inline"), target: :_blank, rel: :noopener) do %>
+        <%= render("active_storage/blobs/blob", blob: record.pdf, size: [75, 100]) %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

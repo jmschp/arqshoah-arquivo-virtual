@@ -7,6 +7,11 @@ class Archive < ApplicationRecord
   include PeopleCitations
   include Registration
 
+  DETAIL_ATTRIBUTES = {
+    direct: %i[registration date city state country document_code document_number page_count],
+    associated: %i[archive_classification archive_type language donor]
+  }.freeze
+
   has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
 
   belongs_to :archive_classification, inverse_of: :archives

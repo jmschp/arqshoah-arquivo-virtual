@@ -1,0 +1,14 @@
+<% if record.try(rich_text_name) %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="description-panel">
+      <%= button_tag(class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#description-panel-collapse" }, aria: { expanded: "false", controls: "description-panel-collapse" }) do %>
+        <%= record.class.human_attribute_name(rich_text_name) %>
+      <% end %>
+    </h2>
+    <div id="description-panel-collapse" class="accordion-collapse collapse" aria-labelledby="description-panel">
+      <div class="accordion-body">
+        <%= record.try(rich_text_name) %>
+      </div>
+    </div>
+  </div>
+<% end %>

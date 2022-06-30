@@ -1,0 +1,31 @@
+<% if record.from_name.present? || record.from_role.present? || record.issuing_agency || record.to_name.present? || record.to_role.present? || record.receiver_agency %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="issuing-agency-panel">
+      <%= button_tag(class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#issuing-agency-panel-collapse" }, aria: { expanded: "false", controls: "issuing-agency-panel-collapse" }) do %>
+        <%= record.class.human_attribute_name(:institutions) %>
+      <% end %>
+    </h2>
+    <div id="issuing-agency-panel-collapse" class="accordion-collapse collapse" aria-labelledby="issuing-agency-panel">
+      <div class="accordion-body">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <h4><%= record.class.human_attribute_name(:issuing_agency) %></h4>
+            <p>
+              <strong><%= record.class.human_attribute_name(:from_name) %></strong>: <%= record.from_name %><br>
+              <strong><%= record.class.human_attribute_name(:from_role) %></strong>: <%= record.from_role %><br>
+              <strong><%= I18n.t(:agency, scope: [Organization.i18n_scope, :models, Organization.model_name.i18n_key]) %></strong>: <%= record.issuing_agency&.name %>
+            </p>
+          </div>
+          <div class="col-12 col-md-6">
+            <h4><%= record.class.human_attribute_name(:receiver_agency) %></h4>
+            <p>
+              <strong><%= record.class.human_attribute_name(:to_name) %></strong>: <%= record.to_name %><br>
+              <strong><%= record.class.human_attribute_name(:to_role) %></strong>: <%= record.to_role %><br>
+              <strong><%= I18n.t(:agency, scope: [Organization.i18n_scope, :models, Organization.model_name.i18n_key]) %></strong>: <%= record.receiver_agency&.name %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

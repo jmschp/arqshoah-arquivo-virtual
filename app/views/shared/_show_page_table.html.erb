@@ -1,0 +1,21 @@
+<table class="table table-hover">
+  <tbody>
+    <% record.class::DETAIL_ATTRIBUTES[:direct].each do |att|  %>
+      <% if record.try(att) %>
+        <tr>
+          <th scope="row"><%= record.class.human_attribute_name(att) %></th>
+          <td><%= record.try(att) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% record.class::DETAIL_ATTRIBUTES[:associated].each do |ass|  %>
+      <% if record.try(ass) %>
+        <tr>
+          <th scope="row"><%= record.class.human_attribute_name(ass) %></th>
+          <td><%= record.try(ass).try(:name) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <%= render "shared/show_page_pdf", { record: record } %>
+  </tbody>
+</table>

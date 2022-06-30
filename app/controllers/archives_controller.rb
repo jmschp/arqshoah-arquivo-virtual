@@ -8,6 +8,9 @@ class ArchivesController < ApplicationController
   end
 
   def show
-    @archive = Archive.with_attached_images.find(params[:id])
+    @archive = Archive.includes(
+      :archive_classification, :archive_type, :language, :donor, :people_cited,
+      :issuing_agency, :receiver_agency
+    ).with_attached_images.with_rich_text_description.with_rich_text_observation.find(params[:id])
   end
 end

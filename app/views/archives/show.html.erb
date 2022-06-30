@@ -1,13 +1,22 @@
 <div class="container">
   <%= render "shared/show_page_header", record: @archive %>
 
-  <div class="row mt-4 mb-3">
+  <div class="row mt-5 mb-5">
     <div class="col-12 col-md-6">
       <%= render "shared/show_page_carousel", record: @archive %>
     </div>
 
     <div class="col-12 col-md-6">
+      <%= render "shared/show_page_table", record: @archive %>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="accordion" id="accordion-panels">
+      <%= render 'archives/accordion_items/agency', { record: @archive } %>
+      <%= render 'shared/accordion_items/citations', { record: @archive } %>
+      <%= render 'shared/accordion_items/rich_text', { record: @archive, rich_text_name: :description } %>
+      <%= render 'shared/accordion_items/rich_text', { record: @archive, rich_text_name: :observation } %>
     </div>
   </div>
 </div>
