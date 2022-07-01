@@ -72,7 +72,9 @@ end
 
 group :development do
   gem "better_errors"
+  gem "better_html"
   gem "binding_of_caller"
+  gem "erb_lint", require: false
   gem "faker"
   gem "letter_opener_web"
   gem "rubocop", require: false
