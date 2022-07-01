@@ -4,8 +4,10 @@
     <%= link_to(record, class: "btn btn-primary btn-sm position-absolute top-0 end-0") do %>
       <i class="fas fa-eye"></i>
     <% end %>
-    <%= link_to url_for([:edit, :admin, record]), class: "btn btn-primary btn-sm position-absolute bottom-0 end-0" do %>
-      <i class="fas fa-edit"></i>
+    <% if admin_user_signed_in? %>
+      <%= link_to([:edit, :admin, record], class: "btn btn-primary btn-sm position-absolute bottom-0 end-0") do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
     <% end %>
 
     <div class="row g-0">
@@ -15,15 +17,15 @@
             <div class="carousel-inner">
               <% record.images.each_with_index do |image, index| %>
                 <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block"  %>
+                  <%= image_tag(image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block")  %>
                 </div>
               <% end %>
             </div>
           </div>
         <% elsif record.respond_to?(:image) && record.image.attached? %>
-          <%= image_tag record.image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block"  %>
+          <%= image_tag(record.image.variant(resize_to_fill: [250, 325, crop: :attention]), class: "img-fluid rounded-start mx-auto d-block")  %>
         <% else %>
-          <%= image_tag "image-placeholder.png", class: "img-fluid rounded-start mx-auto d-block", style: "max-height: 200px" %>
+          <%= image_tag("image-placeholder.png", class: "img-fluid rounded-start mx-auto d-block", style: "max-height: 200px") %>
         <% end %>
       </div>
 
