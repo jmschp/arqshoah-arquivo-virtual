@@ -4,15 +4,15 @@
       <%= image_tag("favicon.ico", width: "24", height: "24") %> Arqshoah
     <% end %>
 
-    <%= button_tag(sanitize("<span class='navbar-toggler-icon'></span>", { tags: %w[span] }), { class:"navbar-toggler", type: "button", data: { "bs-toggle" => "collapse", "bs-target" => "#main-navbar" }, aria: { controls: "main-navbar", expanded: "false", label: "Toggle navigation", }}) %>
+    <%= button_tag(sanitize("<span class='navbar-toggler-icon'></span>", { tags: %w[span] }), { class: "navbar-toggler", type: "button", data: { "bs-toggle" => "collapse", "bs-target" => "#main-navbar" }, aria: { controls: "main-navbar", expanded: "false", label: "Toggle navigation" } }) %>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <div class="navbar-nav w-100">
-        <%= link_to(Archive.model_name.human(count: 2), archives_path, { class: "nav-link #{request.filtered_parameters[:controller] == "archives" ? "active" : nil}", aria: { current: request.filtered_parameters[:controller] == "archives" ? "active" : nil }}) %>
+        <%= link_to(Archive.model_name.human(count: 2), archives_path, { class: "nav-link #{request.filtered_parameters[:controller] == 'archives' ? 'active' : nil}", aria: { current: request.filtered_parameters[:controller] == "archives" ? "active" : nil } }) %>
 
         <% if admin_user_signed_in? %>
           <div class="nav-item dropdown ms-auto">
-            <%= link_to(current_admin_user.email, nil, { class: "nav-link dropdown-toggle", id: "main-navbar-dropdown", role: "button", data: { "bs-toggle" => "dropdown"}, aria: { expanded: "false" }}) %>
+            <%= link_to(current_admin_user.email, nil, { class: "nav-link dropdown-toggle", id: "main-navbar-dropdown", role: "button", data: { "bs-toggle" => "dropdown" }, aria: { expanded: "false" } }) %>
             <div class="dropdown-menu" aria-labelledby="main-navbar-dropdown">
               <%= link_to("Admin", admin_root_path, class: "dropdown-item") %>
               <%= link_to("Logout", destroy_admin_user_session_path, method: :delete, class: "dropdown-item") %>

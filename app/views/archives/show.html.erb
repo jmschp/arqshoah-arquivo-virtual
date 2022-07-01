@@ -13,10 +13,10 @@
 
   <div class="row">
     <div class="accordion" id="accordion-panels">
-      <%= render 'archives/accordion_items/agency', { record: @archive } %>
-      <%= render 'shared/accordion_items/citations', { record: @archive } %>
-      <%= render 'shared/accordion_items/rich_text', { record: @archive, rich_text_name: :description } %>
-      <%= render 'shared/accordion_items/rich_text', { record: @archive, rich_text_name: :observation } %>
+      <%= render "archives/accordion_items/agency", { record: @archive } %>
+      <%= render "shared/accordion_items/citations", { record: @archive } %>
+      <%= render "shared/accordion_items/rich_text", { record: @archive, rich_text_name: :description } %>
+      <%= render "shared/accordion_items/rich_text", { record: @archive, rich_text_name: :observation } %>
     </div>
   </div>
 </div>

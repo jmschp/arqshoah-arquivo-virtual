@@ -1,6 +1,6 @@
 <table class="table table-hover">
   <tbody>
-    <% record.class::DETAIL_ATTRIBUTES[:direct].each do |att|  %>
+    <% record.class::DETAIL_ATTRIBUTES[:direct].each do |att| %>
       <% if record.try(att) %>
         <tr>
           <th scope="row"><%= record.class.human_attribute_name(att) %></th>
@@ -8,7 +8,7 @@
         </tr>
       <% end %>
     <% end %>
-    <% record.class::DETAIL_ATTRIBUTES[:associated].each do |ass|  %>
+    <% record.class::DETAIL_ATTRIBUTES[:associated].each do |ass| %>
       <% if record.try(ass) %>
         <tr>
           <th scope="row"><%= record.class.human_attribute_name(ass) %></th>
