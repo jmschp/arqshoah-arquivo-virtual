@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+  get "/admin_users" => "admin/dashboard#index", as: :admin_user_root
+
   resources :archives, only: %i[index show]
 end
