@@ -16,7 +16,9 @@ class Organization < ApplicationRecord
   has_many :education_supporters, as: :donor, inverse_of: :donor, dependent: :destroy
   has_many :supported_education, through: :education_supporters, source: :education
   has_many :published_teaching_materials, class_name: "TeachingMaterial", foreign_key: :publishing_company_id, inverse_of: :publishing_company, dependent: :restrict_with_error
-  # rubocop:enable Layout/LineLength
+
+  scope :book_publishing_companies, -> { joins(:published_books).order(:name).distinct }
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
+  # rubocop:enable Layout/LineLength
 end

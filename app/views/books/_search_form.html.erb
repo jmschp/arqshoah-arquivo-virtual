@@ -1,0 +1,48 @@
+<%= search_form_for q do |f| %>
+  <div class="mb-2">
+    <%= f.label :general_search, nil, { class: "form-label" } %>
+    <%= f.search_field :general_search, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :title_cont, Book.human_attribute_name(:title), { class: "form-label" } %>
+    <%= f.search_field :title_cont, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :publishing_company_id_eq, Book.human_attribute_name(:publishing_company), { class: "form-label" } %>
+    <%= f.select :publishing_company_id_eq, Organization.book_publishing_companies.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :book_category_id_eq, Book.human_attribute_name(:book_category), class: "form-label" %>
+    <%= f.select :book_category_id_eq, BookCategory.order(:name).pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :book_field_id_eq, Book.human_attribute_name(:book_field), class: "form-label" %>
+    <%= f.select :book_field_id_eq, BookField.order(:name).pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :authors_id_eq, Book.human_attribute_name(:authors), class: "form-label" %>
+    <%= f.select :authors_id_eq, Person.book_authors.select_options_name, { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :language_id_eq, Book.human_attribute_name(:language), class: "form-label" %>
+    <%= f.select :language_id_eq, Language.book_language.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <%= f.label :publishing_year_gteq, Book.human_attribute_name(:publishing_year), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.number_field :publishing_year_gteq, { class: "form-control", min: 1000, max: 9999 } %>
+    <span class="input-group-text">Até</span>
+    <%= f.number_field :publishing_year_lteq, { class: "form-control", min: 1000, max: 9999 } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<div class="container-fluid">
+
+  <%= render "shared/index_page_header", title: Book.model_name.human(count: 2), records: @books %>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-3">
+    <%= render partial: "shared/record_card", collection: @books, as: :record, locals: { info_one: :book_category, info_two: :book_field } %>
+  </div>
+</div>

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get "/admin_users" => "admin/dashboard#index", as: :admin_user_root
 
   resources :archives, only: %i[index show]
+  resources :books, only: %i[index show]
 end

@@ -56,6 +56,8 @@ class Person < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :gender, presence: true, unless: -> { self.commoner? }
 
+  scope :book_authors, -> { joins(:book_authors).order(:last_name).distinct }
+
   ransack_alias :name, :first_name_or_last_name_or_name_variation
   # rubocop:enable Layout/LineLength
 
