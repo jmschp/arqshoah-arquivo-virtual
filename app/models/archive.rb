@@ -7,10 +7,20 @@ class Archive < ApplicationRecord
   include PeopleCitations
   include Registration
 
-  DETAIL_ATTRIBUTES = {
-    direct: %i[registration date city state country document_code document_number page_count],
-    associated: %i[archive_classification archive_type language donor]
-  }.freeze
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :registration },
+    { type: :associated, attribute: :archive_classification },
+    { type: :associated, attribute: :archive_type },
+    { type: :direct, attribute: :date },
+    { type: :direct, attribute: :city },
+    { type: :direct, attribute: :state },
+    { type: :direct, attribute: :country },
+    { type: :direct, attribute: :document_code },
+    { type: :direct, attribute: :document_number },
+    { type: :direct, attribute: :page_count },
+    { type: :associated, attribute: :language },
+    { type: :associated, attribute: :donor }
+  ].freeze
 
   has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
 
