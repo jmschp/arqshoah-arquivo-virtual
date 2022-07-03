@@ -13,6 +13,7 @@
 
   <div class="row">
     <div class="accordion" id="accordion-panels">
+      <%= render "books/accordion_items/authors", { record: @book } %>
       <%= render "books/accordion_items/iconographies", { record: @book } %>
       <%= render "shared/accordion_items/citations", { record: @book } %>
       <%= render "shared/accordion_items/rich_text", { record: @book, rich_text_name: :description } %>

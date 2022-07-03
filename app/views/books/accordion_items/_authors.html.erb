@@ -1,0 +1,20 @@
+<% if record.authors.present? %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="authors-panel-heading">
+      <%= button_tag({ class: "accordion-button collapsed", type: "button", data: { "bs-toggle" => "collapse", "bs-target" => "#authors-panel-collapse" }, aria: { expanded: false, controls: "authors-panel-collapse" } }) do %>
+        <%= Book.human_attribute_name(:authors) %>
+      <% end %>
+    </h2>
+    <div id="authors-panel-collapse" class="accordion-collapse collapse" aria-labelledby="authors-panel-heading">
+      <div class="accordion-body">
+        <ul class="list-group-flush">
+          <% record.authors.find_each do |author| %>
+            <li class="list-group-item">
+              <%= author.name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

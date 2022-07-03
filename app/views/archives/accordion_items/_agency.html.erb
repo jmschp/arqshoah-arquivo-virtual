@@ -1,7 +1,7 @@
 <% if record.from_name.present? || record.from_role.present? || record.issuing_agency || record.to_name.present? || record.to_role.present? || record.receiver_agency %>
   <div class="accordion-item">
     <h2 class="accordion-header" id="issuing-agency-panel">
-      <%= button_tag(class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#issuing-agency-panel-collapse" }, aria: { expanded: "false", controls: "issuing-agency-panel-collapse" }) do %>
+      <%= button_tag(class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#issuing-agency-panel-collapse" }, aria: { expanded: false, controls: "issuing-agency-panel-collapse" }) do %>
         <%= record.class.human_attribute_name(:institutions) %>
       <% end %>
     </h2>

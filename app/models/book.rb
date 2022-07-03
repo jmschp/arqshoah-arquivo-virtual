@@ -6,7 +6,20 @@ class Book < ApplicationRecord
   include PeopleCitations
   include Registration
 
-  DETAIL_ATTRIBUTES = { direct: [], associated: [] }
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :registration },
+    { type: :associated, attribute: :book_category },
+    { type: :associated, attribute: :book_field },
+    { type: :associated, attribute: :publishing_company },
+    { type: :direct, attribute: :edition },
+    { type: :direct, attribute: :publishing_year },
+    { type: :direct, attribute: :city },
+    { type: :direct, attribute: :state },
+    { type: :direct, attribute: :country },
+    { type: :direct, attribute: :isbn },
+    { type: :direct, attribute: :pages },
+    { type: :associated, attribute: :language }
+  ].freeze
 
   belongs_to :book_category, inverse_of: :books
   belongs_to :book_field, inverse_of: :books
