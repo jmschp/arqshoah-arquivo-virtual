@@ -8,4 +8,5 @@ class Language < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
 
   scope :book_language, -> { joins(:books).order(:name).distinct }
+  scope :archives_language, -> { joins(:archives).order(:name).distinct }
 end

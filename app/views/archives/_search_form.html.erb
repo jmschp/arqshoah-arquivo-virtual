@@ -1,45 +1,45 @@
 <%= search_form_for q do |f| %>
   <div class="mb-2">
-    <%= f.label :general_search, "Busca geral", class: "form-label" %>
-    <%= f.search_field :general_search, class: "form-control form-control-sm." %>
+    <%= f.label :general_search, nil, { class: "form-label" } %>
+    <%= f.search_field :general_search, { class: "form-control" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :title_cont, Archive.human_attribute_name(:title), class: "form-label" %>
-    <%= f.search_field :title_cont, class: "form-control form-control-sm" %>
+    <%= f.label :title_cont, Archive.human_attribute_name(:title), { class: "form-label" } %>
+    <%= f.search_field :title_cont, { class: "form-control" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :archive_classification_id_eq, Archive.human_attribute_name(:archive_classification), class: "form-label" %>
-    <%= f.select :archive_classification_id_eq, ArchiveClassification.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+    <%= f.label :archive_classification_id_eq, Archive.human_attribute_name(:archive_classification), { class: "form-label" } %>
+    <%= f.select :archive_classification_id_eq, ArchiveClassification.order(:name).pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :archive_type_id_eq, Archive.human_attribute_name(:archive_type), class: "form-label" %>
-    <%= f.select :archive_type_id_eq, ArchiveType.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+    <%= f.label :archive_type_id_eq, Archive.human_attribute_name(:archive_type), { class: "form-label" } %>
+    <%= f.select :archive_type_id_eq, ArchiveType.order(:name).pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :language_id_eq, Archive.human_attribute_name(:language), class: "form-label" %>
-    <%= f.select :language_id_eq, Language.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+    <%= f.label :language_id_eq, Archive.human_attribute_name(:language), { class: "form-label" } %>
+    <%= f.select :language_id_eq, Language.archives_language.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :issuing_agency_id_eq, Archive.human_attribute_name(:issuing_agency), class: "form-label" %>
-    <%= f.select :issuing_agency_id_eq, Organization.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+    <%= f.label :issuing_agency_id_eq, Archive.human_attribute_name(:issuing_agency), { class: "form-label" } %>
+    <%= f.select :issuing_agency_id_eq, Organization.issuer_agencies.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
   </div>
 
   <div class="mb-2">
-    <%= f.label :receiver_agency_id_eq, Archive.human_attribute_name(:receiver_agency), class: "form-label" %>
-    <%= f.select :receiver_agency_id_eq, Organization.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+    <%= f.label :receiver_agency_id_eq, Archive.human_attribute_name(:receiver_agency), { class: "form-label" } %>
+    <%= f.select :receiver_agency_id_eq, Organization.receiver_agencies.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
   </div>
 
-  <%= f.label :date_gteq, Archive.human_attribute_name(:date), class: "form-label" %>
+  <%= f.label :date_gteq, Archive.human_attribute_name(:date), { class: "form-label" } %>
   <div class="input-group input-group-sm mb-2">
     <span class="input-group-text">De</span>
-    <%= f.date_field :date_gteq, class: "form-control" %>
+    <%= f.date_field :date_gteq, { class: "form-control" } %>
     <span class="input-group-text">Até</span>
-    <%= f.date_field :date_lteq, class: "form-control" %>
+    <%= f.date_field :date_lteq, { class: "form-control" } %>
   </div>
 
   <div class="d-grid">
