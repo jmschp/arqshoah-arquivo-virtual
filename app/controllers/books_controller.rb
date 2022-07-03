@@ -6,5 +6,7 @@ class BooksController < ApplicationController
     @books = @q.result(distinct: true).includes(:book_category, :book_field).with_attached_image.page(params[:page])
   end
 
-  def show; end
+  def show
+    @book = Book.with_attached_image.with_rich_text_description.with_rich_text_observation.find(params[:id])
+  end
 end

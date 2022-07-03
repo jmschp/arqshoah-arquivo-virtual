@@ -6,6 +6,8 @@ class Book < ApplicationRecord
   include PeopleCitations
   include Registration
 
+  DETAIL_ATTRIBUTES = { direct: [], associated: [] }
+
   belongs_to :book_category, inverse_of: :books
   belongs_to :book_field, inverse_of: :books
   belongs_to :publishing_company, class_name: "Organization", inverse_of: :published_books, optional: true
