@@ -1,0 +1,15 @@
+<% if record.academic_formation.present? || record.professional_activities.present? %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="professional-activities-panel">
+      <%= button_tag({ class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#professional-activities-panel-collapse" }, aria: { expanded: false, controls: "professional-activities-panel-collapse" } }) do %>
+        <%= record.class.human_attribute_name(:professional_activities) %>
+      <% end %>
+    </h2>
+    <div id="professional-activities-panel-collapse" class="accordion-collapse collapse" aria-labelledby="professional-activities-panel">
+      <div class="accordion-body">
+        <p><strong><%= record.class.human_attribute_name(:academic_formation) %></strong>: <%= record.academic_formation %></p>
+        <%= record.professional_activities %>
+      </div>
+    </div>
+  </div>
+<% end %>

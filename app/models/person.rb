@@ -72,6 +72,26 @@ class Person < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
+  def person_gender
+    self.class.human_attribute_name("gender.#{self.gender}")
+  end
+
+  def paternal_grandfather
+    self.father.try(:father)
+  end
+
+  def paternal_grandmother
+    self.father.try(:mother)
+  end
+
+  def maternal_grandfather
+    self.mother.try(:father)
+  end
+
+  def maternal_grandmother
+    self.mother.try(:mother)
+  end
+
   private
 
   def commoner?

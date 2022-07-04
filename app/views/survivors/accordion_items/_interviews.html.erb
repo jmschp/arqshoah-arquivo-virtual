@@ -1,0 +1,24 @@
+<% if record.interviews_given.any? %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="interviews-panel">
+      <%= button_tag({ class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#interviews-panel-collapse" }, aria: { expanded: "false", controls: "interviews-panel-collapse" } }) do %>
+        <%= Interview.model_name.human(count: 2) %>
+      <% end %>
+    </h2>
+    <div id="interviews-panel-collapse" class="accordion-collapse collapse" aria-labelledby="interviews-panel">
+      <div class="accordion-body">
+        <div class="row">
+          <% record.interviews_given.each do |interview| %>
+            <div class="col-12 col-md-6 mb-3">
+              <strong><%= Interview.human_attribute_name(:city) %></strong>: <%= interview.city %><br>
+              <strong><%= Interview.human_attribute_name(:state) %></strong>: <%= interview.state %><br>
+              <strong><%= Interview.human_attribute_name(:country) %></strong>: <%= interview.country %><br>
+              <strong><%= Interview.human_attribute_name(:interviewer) %></strong>: <%= interview.interviewer.name %><br>
+              <strong><%= Interview.human_attribute_name(:date) %></strong>: <%= l(interview.date) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,76 @@
+<% if record.mother.present? || record.father.present? || record.spouse.present? || record.other_family_members.present? %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="family-panel">
+      <%= button_tag({ class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#family-panel-collapse" }, aria: { expanded: false, controls: "family-panel-collapse" } }) do %>
+        <%= record.class.human_attribute_name(:family) %>
+      <% end %>
+    </h2>
+    <div id="family-panel-collapse" class="accordion-collapse collapse" aria-labelledby="family-panel">
+      <div class="accordion-body">
+        <div class="row">
+          <% if record.mother.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:mother) %></strong>: <%= record.mother.name %></p>
+            </div>
+          <% end %>
+          <% if record.father.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:father) %></strong>: <%= record.father.name %></p>
+            </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <% if record.maternal_grandmother.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:maternal_grandmother) %></strong>: <%= record.maternal_grandmother&.name %></p>
+            </div>
+          <% end %>
+          <% if record.maternal_grandfather.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:paternal_grandmother) %></strong>: <%= record.paternal_grandmother&.name %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <% if record.paternal_grandmother.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:maternal_grandfather) %></strong>: <%= record.maternal_grandfather&.name %></p>
+            </div>
+          <% end %>
+          <% if record.paternal_grandfather.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:paternal_grandfather) %></strong>: <%= record.paternal_grandfather&.name %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <% if record.spouse.present? %>
+            <div class="col-12 col-md-6">
+              <p><strong><%= record.class.human_attribute_name(:spouse) %></strong>: <%= record.spouse.name %></p>
+            </div>
+          <% end %>
+          <% if @siblings.present? %>
+            <div class="col-12 col-md-6">
+              <strong><%= record.class.human_attribute_name(:siblings) %></strong>:
+              <ul class="list-group-flush">
+                <% @siblings.find_each do |sibling| %>
+                  <li class="list-group-item"><%= sibling.name %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <% if record.other_family_members.present? %>
+            <div class="col-12">
+              <%= record.other_family_members %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

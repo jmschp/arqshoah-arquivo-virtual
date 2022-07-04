@@ -7,6 +7,11 @@
             <th scope="row"><%= record.class.human_attribute_name(att[:attribute]) %></th>
             <td><%= record.try(att[:attribute]) %></td>
           </tr>
+        <% elsif att[:type] == :date_display %>
+          <tr>
+            <th scope="row"><%= record.class.human_attribute_name(att[:attribute]) %></th>
+            <td><%= record.date_display(att[:attribute]) %></td>
+          </tr>
         <% elsif att[:type] == :associated %>
           <tr>
             <th scope="row"><%= record.class.human_attribute_name(att[:attribute]) %></th>
