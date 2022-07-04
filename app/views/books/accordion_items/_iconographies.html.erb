@@ -10,8 +10,7 @@
         <div class="list-group">
           <div class="d-flex justify-content-evenly">
             <% record.iconographies.each do |iconography| %>
-              <!-- TODO: set link-->
-              <%= link_to("#") do %>
+              <%= link_to(iconography) do %>
                 <figure class="figure mx-2">
                   <%= image_tag(iconography.image.variant(resize_to_fill: [400, 300, { crop: :attention }]), { class: "d-block figure-img img-fluid rounded mx-auto" }) %>
                   <figcaption class="figure-caption text-center"><%= iconography.title %></figcaption>

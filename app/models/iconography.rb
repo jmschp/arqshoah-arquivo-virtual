@@ -7,7 +7,19 @@ class Iconography < ApplicationRecord
   include PeopleCitations
   include Registration
 
-  has_paper_trail skip: [:document_ts_vector], on: %i[create update destroy]
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :registration },
+    { type: :associated, attribute: :iconography_support },
+    { type: :associated, attribute: :iconography_technic },
+    { type: :associated, attribute: :iconography_type },
+    { type: :associated, attribute: :author },
+    { type: :direct, attribute: :date },
+    { type: :direct, attribute: :city },
+    { type: :direct, attribute: :state },
+    { type: :direct, attribute: :country },
+    { type: :direct, attribute: :nature_of_object },
+    { type: :associated, attribute: :donor }
+  ].freeze
 
   belongs_to :author, class_name: "Person", inverse_of: :authored_iconographies, optional: true
   belongs_to :donor, polymorphic: true, inverse_of: :donated_iconographies
@@ -33,6 +45,12 @@ class Iconography < ApplicationRecord
   validates :original, inclusion: [true, false]
   validates :title, presence: true, length: { maximum: 255 }
   # rubocop:enable Layout/LineLength
+
+  has_paper_trail skip: [:document_ts_vector], on: %i[create update destroy]
+
+  def nature_of_object
+    self.original? ? self.class.human_attribute_name(:original) : self.class.human_attribute_name(:replica)
+  end
 
   private
 
