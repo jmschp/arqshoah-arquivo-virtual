@@ -1,0 +1,43 @@
+<%= search_form_for q do |f| %>
+  <div class="mb-2">
+    <%= f.label :general_search, nil, { class: "form-label" } %>
+    <%= f.search_field :general_search, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :title_or_subtitle_cont, Iconography.human_attribute_name(:title), { class: "form-label" } %>
+    <%= f.search_field :title_cont, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :iconography_technic_id_eq, Iconography.human_attribute_name(:iconography_technic), { class: "form-label" } %>
+    <%= f.select :iconography_technic_id_eq, IconographyTechnic.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :iconography_type_id_eq, Iconography.human_attribute_name(:iconography_type), { class: "form-label" } %>
+    <%= f.select :iconography_type_id_eq, IconographyType.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :iconography_support_id_eq, Iconography.human_attribute_name(:iconography_support), { class: "form-label" } %>
+    <%= f.select :iconography_support_id_eq, IconographySupport.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :author_id_eq, Iconography.human_attribute_name(:author), { class: "form-label" } %>
+    <%= f.select :author_id_eq, Person.iconography_authors.select_options_name, { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <%= f.label :date_gteq, Iconography.human_attribute_name(:date), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.date_field :date_gteq, { class: "form-control" } %>
+    <span class="input-group-text">Até</span>
+    <%= f.date_field :date_lteq, { class: "form-control" } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

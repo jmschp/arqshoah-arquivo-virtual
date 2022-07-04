@@ -57,12 +57,13 @@ class Person < ApplicationRecord
   validates :gender, presence: true, unless: -> { self.commoner? }
 
   scope :book_authors, -> { joins(:book_authors).order(:last_name).distinct }
+  scope :iconography_authors, -> { joins(:authored_iconographies).order(:last_name).distinct }
 
   ransack_alias :name, :first_name_or_last_name_or_name_variation
   # rubocop:enable Layout/LineLength
 
   def self.select_options_name
-    self.order(:last_name).pluck(:first_name, :last_name, :id).map do |person|
+    self.pluck(:first_name, :last_name, :id).map do |person|
       ["#{person[1].upcase} #{person[0]}", person[2]]
     end
   end
