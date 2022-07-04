@@ -1,0 +1,46 @@
+<%= search_form_for q do |f| %>
+  <div class="mb-2">
+    <%= f.label :general_search, nil, { class: "form-label" } %>
+    <%= f.search_field :general_search, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :name_or_name_variation_cont, Person.human_attribute_name(:name), { class: "form-label" } %>
+    <%= f.search_field :name_or_name_variation_cont, class: "form-control" %>
+  </div>
+
+  <%= f.label :birth_date_gteq, Person.human_attribute_name(:birth_date), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.date_field :birth_date_gteq, { class: "form-control" } %>
+    <span class="input-group-text">Até</span>
+    <%= f.date_field :birth_date_lteq, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :birth_place_country_cont, Person.human_attribute_name(:birth_place_country), { class: "form-label" } %>
+    <%= f.select :birth_place_country_cont, @survivors.pluck(:birth_place_country), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <%= f.label :death_date_gteq, Person.human_attribute_name(:death_date), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.date_field :death_date_gteq, { class: "form-control" } %>
+    <span class="input-group-text">Até</span>
+    <%= f.date_field :death_date_lteq, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :death_place_country_cont, Person.human_attribute_name(:death_place_country), { class: "form-label" } %>
+    <%= f.select :death_place_country_cont, @survivors.pluck(:death_place_country), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :religion_id_eq, Person.human_attribute_name(:religion), { class: "form-label" } %>
+    <%= f.select :religion_id_eq, Religion.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
