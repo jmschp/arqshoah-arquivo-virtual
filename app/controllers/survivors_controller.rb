@@ -7,7 +7,9 @@ class SurvivorsController < ApplicationController
   end
 
   def show
-    @survivor = Survivor.find(params[:id])
+    @survivor = Survivor.includes(:religion).with_attached_images.with_rich_text_description.with_rich_text_observation
+                        .with_rich_text_professional_activities.find(params[:id])
+
     @siblings = Survivor.siblings(@survivor.id, @survivor.mother&.id, @survivor.father&.id)
   end
 end
