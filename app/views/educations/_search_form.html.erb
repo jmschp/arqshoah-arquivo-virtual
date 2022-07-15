@@ -1,0 +1,28 @@
+<%= search_form_for q do |f| %>
+  <div class="mb-2">
+    <%= f.label :general_search, { class: "form-label" } %>
+    <%= f.search_field :general_search, class: "form-control" %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :title_cont, Education.human_attribute_name(:title), { class: "form-label" } %>
+    <%= f.search_field :title_cont, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :education_category_id_eq, Education.human_attribute_name(:education_category), { class: "form-label" } %>
+    <%= f.select :education_category_id_eq, EducationCategory.order(:name).pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <%= f.label :start_date_gteq, Education.human_attribute_name(:start_date), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.date_field :start_date_gteq, { class: "form-control" } %>
+    <span class="input-group-text">Até</span>
+    <%= f.date_field :end_date_lteq, { class: "form-control" } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

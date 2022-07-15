@@ -10,9 +10,10 @@
       <div class="navbar-nav w-100">
         <%= link_to(Archive.model_name.human(count: 2), archives_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'archives'}", aria: { current: request.filtered_parameters[:controller] == "archives" ? "active" : nil } }) %>
         <%= link_to(Book.model_name.human(count: 2), books_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'books'}", aria: { current: request.filtered_parameters[:controller] == "books" ? "active" : nil } }) %>
+        <%= link_to(Education.model_name.human(count: 2), educations_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'educations'}", aria: { current: request.filtered_parameters[:controller] == "educations" ? "active" : nil } }) %>
         <%= link_to(Iconography.model_name.human(count: 2), iconographies_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'iconographies'}", aria: { current: request.filtered_parameters[:controller] == "iconographies" ? "active" : nil } }) %>
-        <%= link_to(Survivor.model_name.human(count: 2), survivors_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'survivors'}", aria: { current: request.filtered_parameters[:controller] == "survivors" ? "active" : nil } }) %>
         <%= link_to(Savior.model_name.human(count: 2), saviors_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'saviors'}", aria: { current: request.filtered_parameters[:controller] == "saviors" ? "active" : nil } }) %>
+        <%= link_to(Survivor.model_name.human(count: 2), survivors_path, { class: "nav-link#{' active' if request.filtered_parameters[:controller] == 'survivors'}", aria: { current: request.filtered_parameters[:controller] == "survivors" ? "active" : nil } }) %>
 
         <% if admin_user_signed_in? %>
           <div class="nav-item dropdown ms-auto">
