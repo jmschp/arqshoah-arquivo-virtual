@@ -7,8 +7,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.includes(
-      :book_category, :book_field, :publishing_company, :language, :people_cited, :iconographies, :authors
-    ).with_attached_image.with_rich_text_description.with_rich_text_observation.find(params[:id])
+    @book = Book.with_attached_image.with_attached_pdf
+                .find(params[:id])
   end
 end

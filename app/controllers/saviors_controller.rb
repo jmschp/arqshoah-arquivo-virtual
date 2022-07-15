@@ -7,7 +7,7 @@ class SaviorsController < ApplicationController
   end
 
   def show
-    @savior = Savior.includes(:religion).with_attached_images.with_rich_text_description.with_rich_text_observation
-                    .with_rich_text_professional_activities.find(params[:id])
+    @savior = Savior.with_attached_images.with_attached_pdf
+                    .find(params[:id])
   end
 end

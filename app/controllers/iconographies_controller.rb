@@ -8,8 +8,7 @@ class IconographiesController < ApplicationController
   end
 
   def show
-    @iconography = Iconography.includes(
-      :author, :donor, :iconography_support, :iconography_technic, :iconography_type
-    ).with_attached_image.with_rich_text_description.with_rich_text_observation.find(params[:id])
+    @iconography = Iconography.with_attached_image
+                              .find(params[:id])
   end
 end

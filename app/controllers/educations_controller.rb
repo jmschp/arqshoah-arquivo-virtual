@@ -8,6 +8,7 @@ class EducationsController < ApplicationController
   end
 
   def show
-    @education = Education.find(params[:id])
+    @education = Education.with_attached_images.with_attached_pdf
+                          .find(params[:id])
   end
 end
