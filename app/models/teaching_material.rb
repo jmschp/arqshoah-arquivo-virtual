@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 class TeachingMaterial < ApplicationRecord
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :title },
+    { type: :associated, attribute: :teaching_material_type },
+    { type: :associated, attribute: :publishing_company },
+    { type: :direct, attribute: :publication_year },
+    { type: :direct, attribute: :pages },
+    { type: :direct, attribute: :recording_hours },
+    { type: :direct, attribute: :recording_link }
+  ].freeze
+
   belongs_to :education, inverse_of: :teaching_material
   belongs_to :teaching_material_type, inverse_of: :teaching_materials
   belongs_to :publishing_company, class_name: "Organization", inverse_of: :published_teaching_materials

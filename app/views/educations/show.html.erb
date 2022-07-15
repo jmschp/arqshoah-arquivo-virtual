@@ -1,2 +1,23 @@
-<h1>Educations#show</h1>
-<p>Find me in app/views/educations/show.html.erb</p>
+<div class="container">
+  <%= render "shared/show_page_header", record: @education %>
+
+  <div class="row mt-5 mb-5">
+    <div class="col-12 col-md-6">
+      <%= render "shared/show_page_carousel", record: @education %>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <%= render "shared/show_page_table", record: @education %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="accordion" id="accordion-panels">
+      <%= render "educations/accordion_items/teaching_material", { record: @education } %>
+      <%= render "educations/accordion_items/promoter_institutions_organizers", { record: @education } %>
+      <%= render "educations/accordion_items/supporters", { record: @education } %>
+      <%= render "shared/accordion_items/rich_text", { record: @education, rich_text_name: :description } %>
+      <%= render "shared/accordion_items/rich_text", { record: @education, rich_text_name: :observation } %>
+    </div>
+  </div>
+</div>

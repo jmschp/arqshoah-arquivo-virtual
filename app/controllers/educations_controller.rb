@@ -7,5 +7,7 @@ class EducationsController < ApplicationController
                     .with_attached_images.page(params[:page])
   end
 
-  def show; end
+  def show
+    @education = Education.find(params[:id])
+  end
 end

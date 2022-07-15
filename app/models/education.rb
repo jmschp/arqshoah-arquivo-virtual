@@ -4,6 +4,17 @@ class Education < ApplicationRecord
   include FullTextSearch
   include Registration
 
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :registration },
+    { type: :direct, attribute: :title },
+    { type: :associated, attribute: :education_category },
+    { type: :associated, attribute: :venue },
+    { type: :direct, attribute: :start_date },
+    { type: :direct, attribute: :end_date },
+    { type: :direct, attribute: :target_public },
+    { type: :direct, attribute: :online_tag }
+  ].freeze
+
   belongs_to :education_category, inverse_of: :educations
   belongs_to :venue, class_name: "Organization", inverse_of: :education_events, optional: true
 
@@ -36,6 +47,10 @@ class Education < ApplicationRecord
   accepts_nested_attributes_for :teaching_material, reject_if: :all_blank, allow_destroy: true
 
   has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
+
+  def online_tag
+    I18n.t(self.online)
+  end
 
   private
 

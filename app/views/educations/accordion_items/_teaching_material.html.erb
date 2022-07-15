@@ -1,0 +1,32 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="teaching_material-panel">
+    <%= button_tag({ class: "accordion-button collapsed", type: "button", data: { "bs-toggle": "collapse", "bs-target": "#teaching_material-panel-collapse" }, aria: { expanded: false, controls: "teaching_material-panel-collapse" } }) do %>
+      <%= TeachingMaterial.model_name.human %>
+    <% end %>
+  </h2>
+  <div id="teaching_material-panel-collapse" class="accordion-collapse collapse" aria-labelledby="teaching_material-panel">
+    <div class="accordion-body">
+      <%= render "shared/show_page_table", record: record.teaching_material %>
+
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <p><strong><%= TeachingMaterial.human_attribute_name(:authors) %></strong></p>
+          <div class="list-group">
+            <% record.teaching_material.authors.each do |author| %>
+              <li class="list-group-item"><%= author.name %></li>
+            <% end %>
+          </div>
+        </div>
+
+        <% if record.teaching_material.pdf.attached? %>
+          <div class="col-12 col-lg-6">
+            <h6><%= TeachingMaterial.human_attribute_name(:pdf) %></h6>
+            <%= link_to(rails_blob_path(education.teaching_material.pdf, disposition: "inline"), { target: :_blank, rel: :noopener }) do %>
+              <%= render "active_storage/blobs/blob", blob: education.teaching_material.pdf, size: [200, 400] %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
