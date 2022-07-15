@@ -13,8 +13,7 @@
               <p><strong><%= Survivor.model_name.human(count: 2) %></strong></p>
               <div class="list-group">
                 <% record.survivors_citations.each do |survivor| %>
-                  <!-- TODO: set link-->
-                  <%= link_to(survivor.name, "#", class: "list-group-item list-group-item-action") %>
+                  <%= link_to(survivor.name, survivor_path(survivor), class: "list-group-item list-group-item-action") %>
                 <% end %>
               </div>
             </div>
@@ -24,8 +23,7 @@
               <p><strong><%= Savior.model_name.human(count: 2) %></strong></p>
               <div class="list-group">
                 <% record.savior_citations.each do |savior| %>
-                  <!-- TODO: set link-->
-                  <%= link_to(savior.name, "#", class: "list-group-item list-group-item-action") %>
+                  <%= link_to(savior.name, savior_path(savior), class: "list-group-item list-group-item-action") %>
                 <% end %>
               </div>
             </div>
