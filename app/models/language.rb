@@ -9,4 +9,5 @@ class Language < ApplicationRecord
 
   scope :book_language, -> { joins(:books).order(:name).distinct }
   scope :archives_language, -> { joins(:archives).order(:name).distinct }
+  scope :newspapers_language, -> { joins(:newspapers).order(:name).distinct }
 end

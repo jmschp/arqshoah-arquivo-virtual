@@ -22,5 +22,6 @@ class Organization < ApplicationRecord
   scope :book_publishing_companies, -> { joins(:published_books).order(:name).distinct }
   scope :issuer_agencies, -> { joins(:issued_archives).order(:name).distinct }
   scope :receiver_agencies, -> { joins(:received_archives).order(:name).distinct }
+  scope :newspaper_publishers, -> { joins(:published_newspapers).order(:name).distinct }
   # rubocop:enable Layout/LineLength
 end

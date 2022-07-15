@@ -1,0 +1,43 @@
+<%= search_form_for q do |f| %>
+  <div class="mb-2">
+    <%= f.label :general_search, { class: "form-label" } %>
+    <%= f.search_field :general_search, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :title_cont, Newspaper.human_attribute_name(:title), { class: "form-label" } %>
+    <%= f.search_field :title_cont, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :newspaper_type_id_eq, Newspaper.human_attribute_name(:press_type), { class: "form-label" } %>
+    <%= f.select :newspaper_type_id_eq, NewspaperType.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :agency_id_eq, Newspaper.human_attribute_name(:agency), { class: "form-label" } %>
+    <%= f.select :agency_id_eq, Organization.newspaper_publishers.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :author_id_eq, Newspaper.human_attribute_name(:author), { class: "form-label" } %>
+    <%= f.select :author_id_eq, Person.newspaper_authors.select_options_name, { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :language_id_eq, Newspaper.human_attribute_name(:language), { class: "form-label" } %>
+    <%= f.select :language_id_eq, Language.newspapers_language.pluck(:name, :id), { include_blank: true }, { class: "tom-select-init" } %>
+  </div>
+
+  <%= f.label :date_gteq, Newspaper.human_attribute_name(:date), { class: "form-label" } %>
+  <div class="input-group input-group-sm mb-2">
+    <span class="input-group-text">De</span>
+    <%= f.date_field :date_gteq, { class: "form-control" } %>
+    <span class="input-group-text">Até</span>
+    <%= f.date_field :date_lteq, { class: "form-control" } %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

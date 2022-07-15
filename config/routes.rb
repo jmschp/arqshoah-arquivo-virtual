@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :books, only: %i[index show]
   resources :educations, only: %i[index show]
   resources :iconographies, only: %i[index show]
+  resources :newspapers, only: %i[index show]
   resources :saviors, only: %i[index show]
   resources :survivors, only: %i[index show]
 end

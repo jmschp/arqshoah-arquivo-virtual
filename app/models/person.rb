@@ -21,7 +21,6 @@ class Person < ApplicationRecord
   has_many :donated_iconographies, as: :donor, class_name: "Iconography", inverse_of: :donor, dependent: :restrict_with_error
   has_many :interviews_given, class_name: "Interview", foreign_key: "interviewed_id", inverse_of: :interviewed, dependent: :destroy
   has_many :interviews_made, class_name: "Interview", foreign_key: "interviewer_id", inverse_of: :interviewer, dependent: :destroy
-
   has_many :education_organizers, inverse_of: :organizer, foreign_key: :organizer_id, dependent: :destroy
   has_many :organized_educations, through: :education_organizers, source: :education
   has_many :education_supporters, as: :donor, inverse_of: :donor, dependent: :destroy
@@ -55,6 +54,7 @@ class Person < ApplicationRecord
 
   scope :book_authors, -> { joins(:book_authors).order(:last_name).distinct }
   scope :iconography_authors, -> { joins(:authored_iconographies).order(:last_name).distinct }
+  scope :newspaper_authors, -> { joins(:authored_newspapers).order(:last_name).distinct }
 
   ransack_alias :name, :first_name_or_last_name_or_name_variation
   # rubocop:enable Layout/LineLength
