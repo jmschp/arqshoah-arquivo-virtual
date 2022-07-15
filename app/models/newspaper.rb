@@ -7,6 +7,19 @@ class Newspaper < ApplicationRecord
   include PeopleCitations
   include Registration
 
+  DETAIL_ATTRIBUTES = [
+    { type: :direct, attribute: :registration },
+    { type: :associated, attribute: :newspaper_type },
+    { type: :associated, attribute: :agency },
+    { type: :associated, attribute: :author },
+    { type: :associated, attribute: :language },
+    { type: :direct, attribute: :print_number },
+    { type: :date_day, attribute: :date },
+    { type: :direct, attribute: :city },
+    { type: :direct, attribute: :state },
+    { type: :direct, attribute: :country }
+  ].freeze
+
   has_paper_trail skip: [:document_ts_vector], on: %i[create destroy update]
 
   belongs_to :newspaper_type, inverse_of: :newspapers
